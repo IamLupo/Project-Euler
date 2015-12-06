@@ -20,5 +20,5 @@ next_lvl = [
 same:
 next_lvl = [ [10, 7], [9, 13], [15, 9] ]
 
-eleminate lowsest values
+eleminate lowest values
 next_lvl = [ 10, 13, 15 ]
