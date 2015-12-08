@@ -35,7 +35,7 @@ uint64_t getSumOfFile(char* output_answer, char* input_file, int colums) {
 	
 	//Put the answer to the
 	mpz_get_str(output_answer, 10, answer);
-	output_answer[11] = 0;
+	output_answer[10] = 0;
 	
 	fclose(pFile);
 	
