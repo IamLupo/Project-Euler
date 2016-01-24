@@ -12,31 +12,11 @@ using namespace std;
 static vector<int> primes;
 
 bool isPrime(int v) {
-	int i, e, p, c;
+	vector<int>::iterator it;
 	
-	if(v <= 1)
-		return false;
-	
-	c = 0;
-	e = primes.size() / 2;
-	p = e;
-	
-	while(c < 3) {
-		if(primes[p] == v)
-			return true;
-		else if(primes[p] > v)
-			p -= e;
-		else if(primes[p] < v)
-			p += e;
-		
-		if(e % 2 == 0)
-			e = e / 2;
-		else
-			e = (e / 2) + 1;
-		
-		if(e == 1)
-			c++;
-	}
+	it = find(primes.begin(), primes.end(), v);
+	if(it != primes.end())
+		return true;
 	
 	return false;
 }
