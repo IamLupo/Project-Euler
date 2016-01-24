@@ -62,7 +62,7 @@ long long firstDivider2(int r) {
 			}
 			
 			//When the prime divisor would be greater than the residual t, 
-			//that residual t is the last prime factor with an exponent=1 
+			//that residual t is the last prime factor with an e=1 
 			//No necessity to identify it.
 			e = 1;
 			while(t % primes[i] == 0) {
@@ -110,7 +110,7 @@ int firstDivider(int s) {
 int main() {
 	genPrime(1000);
 	
-	cout << "result = " << firstDivider2(3000) << endl;
+	cout << "result = " << firstDivider2(500) << endl;
 
 	return 0;
 }
