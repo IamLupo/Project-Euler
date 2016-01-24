@@ -40,7 +40,7 @@ int sumProductPandigital(vector<int> s) {
 	} while(next_permutation(l.begin(), l.end()));
 	
 	//Sum all the products
-	return accumulate(r.begin(), r.end(), 0);;
+	return accumulate(r.begin(), r.end(), 0);
 }
 
 int main() {
