@@ -45,42 +45,30 @@ void genPrime(int m) {
 }
 
 int findMostConsecutivePrimes(int m) {
-	int i, v, l, r, p0, p1;
+	int i, v, l, r, p;
 	
 	r = 0;		// highest result we generate
 	l = 0;		// length of added primes to generate a valid prime
 	v = 0;		// generated value
+	p = 0;		// position of prime we need to subtract
 	
-	p0 = 0;		// position of prime we need to subtract
-	p1 = 0;		// position of prime we need to add
-	
-	/*
-		Find the first one in a row added prime
-	*/
-	for(i = 0; i < primes.size() && v + primes[i] < m; i++) {
+	// Find the first one in a row added prime
+	for(i = 0; i < primes.size() && v + primes[i] < m; i++)
 		v += primes[i];
-		
-		if(isPrime(v)) {
-			l = i;
-			r = v;
-		}
-		
-		p1 = i;
-	}
 	
 	// try looking for a new prime number that has a higher length of primes
-	while(l < p1 - p0) {
-		v -= primes[p0];
-		p0++;
+	while(l < i - p) {
+		v -= primes[p];
+		p++;
 		
 		// the generated prime number must not be higher then our max
-		if(v + primes[p1] < m) {
-			v += primes[p1];
-			p1++;
+		if(v + primes[i] < m) {
+			v += primes[i];
+			i++;
 		}
 		
 		if(isPrime(v)) {
-			l = p1 - p0;
+			l = i - p;
 			r = v;
 		}
 	}
@@ -90,8 +78,8 @@ int findMostConsecutivePrimes(int m) {
 
 int main() {
 	genPrime(1000);
-	
-	cout << "result = " << findMostConsecutivePrimes2(1000000) << endl;
+
+	cout << "result = " << findMostConsecutivePrimes(1000000) << endl;
 	
 	return 0;
 }
