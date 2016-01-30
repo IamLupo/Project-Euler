@@ -1,16 +1,12 @@
-By replacing the 1st digit of the 2-digit number *3,
-it turns out that six of the nine possible values:
+There are exactly ten ways of selecting three from five, 12345:
 
-	13, 23, 43, 53, 73, and 83, are all prime.
+	123, 124, 125, 134, 135, 145, 234, 235, 245, and 345
 
-By replacing the 3rd and 4th digits of 56**3 with the same digit,
-this 5-digit number is the first example having seven primes among
-the ten generated numbers, yielding the family:
-	56003, 56113, 56333, 56443, 56663, 56773, and 56993.
+In combinatorics, we use the notation, 5C3 = 10.
 
-Consequently 56003, being the first member of this family,
-is the smallest prime with this property.
+In general,	nCr = n! / (r!(n−r)!), where r ≤ n, n! = n×(n−1)×...×3×2×1, and 0! = 1.
 
-Find the smallest prime which, by replacing part of the number
-(not necessarily adjacent digits) with the same digit, is part of
-an eight prime value family.
+It is not until n = 23, that a value exceeds one-million: 23C10 = 1144066.
+
+How many, not necessarily distinct, values of  nCr, for 1 ≤ n ≤ 100,
+are greater than one-million?
