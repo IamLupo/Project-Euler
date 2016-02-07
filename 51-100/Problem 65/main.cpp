@@ -1,13 +1,8 @@
 #include <iostream>
 #include <vector>
-#include <algorithm>
-#include <math.h>
-#include <numeric>
-#include <fstream>
-#include <string.h>
-#include <stdio.h>
 
-#include "gmp.h"
+#include "sqrt.h"
+#include "string.h"
 
 using namespace std;
 
@@ -16,64 +11,10 @@ using namespace std;
 	100th convergent of the continued fraction for e.
 */
 
-int add(string s) {
-	int i, v, r;
-	
-	r = 0;
-	
-	for(i = 0; i < s.size(); i++)
-		r += s[i] - 48;
-	
-	return r;
-}
-
-vector<string> getHenceSequence(const vector<int> &v, int l) {
-	int i, vl, id, r;
-	mpz_t x1, x2, y1, y2, t;
-	
-	//Init
-	mpz_init_set_ui(x1, 1);
-	mpz_init_set_ui(x2, v[0]);
-	
-	mpz_init_set_ui(y1, 0);
-	mpz_init_set_ui(y2, 1);
-	mpz_init(t);
-	
-	id = 0;
-	vl = v.size() - 1;
-	
-	for(i = 1; i < l; i++) {
-		//Generate x
-		//t = x2
-		mpz_set(t, x2);
-		
-		mpz_mul_ui(x2, x2, v[id + 1]);
-		mpz_add(x2, x2, x1);
-		
-		//y1 = t
-		mpz_set(x1, t);
-		
-		//Generate y
-		//t = y2
-		mpz_set(t, y2);
-		
-		//y2 = (y2 * v) + y1
-		mpz_mul_ui(y2, y2, v[id + 1]);
-		mpz_add(y2, y2, y1);
-		
-		//y1 = t
-		mpz_set(y1, t);
-		
-		//Next id
-		id = (id + 1) % vl;
-	}
-	
-	return {mpz_get_str(nullptr, 10, x2), mpz_get_str(nullptr, 10, y2)};
-}
-
-vector<int> genPattern(int l) {
+//e = [2; 1,2,1, 1,4,1, 1,6,1 , ... , 1,2k,1, ...].
+IamLupo::Sqrt::CFraction generateE(int l) {
 	int n;
-	vector<int> r;
+	IamLupo::Sqrt::CFraction r;
 	
 	n = 2;
 	r.push_back(2);
@@ -90,13 +31,17 @@ vector<int> genPattern(int l) {
 }
 
 int sumDigitsNumerator(int l) {
-	vector<string> r;
-	vector<int> e;
+	int i;
+	IamLupo::Sqrt::CFraction fr;
+	IamLupo::Sqrt::ExponentialE exp;
 	
-	e = genPattern(l);
-	r = getHenceSequence(e, l);
+	fr = generateE(l);
+	exp = IamLupo::Sqrt::Expo_Init(fr);
 	
-	return add(r[0]);
+	for(i = 1; i < l; i++)
+		IamLupo::Sqrt::Expo_Next(exp);
+	
+	return IamLupo::String::addIntegers(mpz_get_str(nullptr, 10, exp.x2));
 }
 
 int main() {
