@@ -1,4 +1,4 @@
 g++ -c src/Sqrt/Fraction.cpp -o tmp/Fraction.o -I "./include" --std=c++11 -lm
-g++ -c src/String/Add.cpp -o tmp/Add.o -I "./include" --std=c++11
+g++ -c src/String.cpp -o tmp/String.o -I "./include" --std=c++11
 
-ar rcs lib/libiamlupo.a tmp/Fraction.o tmp/Add.o
+ar rcs lib/libiamlupo.a tmp/Fraction.o tmp/String.o
