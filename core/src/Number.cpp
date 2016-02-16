@@ -2,18 +2,7 @@
 
 #include "number.h"
 
-std::vector<int> IamLupo::Number::toVector(long long v) {
-	std::vector<int> r;
-	
-	while(v != 0) {
-		r.push_back(v % 10);
-		v /= 10;
-	}
-	
-	return r;
-}
-
-long long IamLupo::Number::toNumber(const std::vector<int> &v) {
+long long IamLupo::Number::to(const std::vector<int> &v) {
 	int i;
 	long long r;
 	

@@ -1,7 +1,7 @@
 #include "prime.h"
 #include "number.h"
 
-bool IamLupo::Prime::isPrime(const Primes &p, long long v) {
+bool IamLupo::Prime::is(const Primes &p, long long v) {
 	int i;
 	
 	for(i = 0; i < p.size() && p[i] < v / 2; i++)
@@ -40,10 +40,10 @@ bool IamLupo::Prime::isConcatenate(const IamLupo::Primes &p, const std::vector<i
 	int i;
 	
 	for(i = 0; i < r.size(); i++) {
-		if(!IamLupo::Prime::isPrime(p, (v * IamLupo::Number::nextBase(10, r[i])) + r[i]))
+		if(!IamLupo::Prime::is(p, (v * IamLupo::Number::nextBase(10, r[i])) + r[i]))
 			return false;
 		
-		if(!IamLupo::Prime::isPrime(p, (r[i] * IamLupo::Number::nextBase(10, v)) + v))
+		if(!IamLupo::Prime::is(p, (r[i] * IamLupo::Number::nextBase(10, v)) + v))
 			return false;
 	}
 	
