@@ -1,1 +1,1 @@
-g++ main.cpp -o main -static -lm -O2 -lgmp --std=c++11
+g++ main.cpp -o main -L "../../core/lib" -I "../../core/include" -liamlupo --std=c++11 -lgmp

@@ -7,6 +7,7 @@
 #include <string.h>
 
 #include "number.h"
+#include "vector.h"
 #include "prime.h"
 
 using namespace std;
@@ -48,7 +49,7 @@ int findSmallestFamily(int target, int l) {
 	vector<int> t, t2, v;
 	
 	for(i = 0; i < primes.size(); i++) {
-		t = IamLupo::Number::toVector(primes[i]);
+		t = IamLupo::Vector::to(primes[i]);
 		v = findRepetition(t);
 
 		if( primes[i] >= pow(10, l - 1) &&
@@ -66,8 +67,8 @@ int findSmallestFamily(int target, int l) {
 						if(t2[k] == v[j])
 							t2[k] = x;
 					
-					z = IamLupo::Number::toNumber(t2);
-					if(IamLupo::Prime::isPrime(primes, z) && z >= pow(10, l - 1))
+					z = IamLupo::Number::to(t2);
+					if(IamLupo::Prime::is(primes, z) && z >= pow(10, l - 1))
 						c++;
 				}
 				

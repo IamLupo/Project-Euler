@@ -6,37 +6,14 @@
 #include <fstream>
 #include <string.h>
 
+#include "vector.h"
+
 using namespace std;
 
 /*
 	Find the smallest positive integer, x, such that 2x, 3x, 4x, 5x, and 6x,
 	contain the same digits.
 */
-
-vector<int> toVector(int v) {
-	vector<int> r;
-	
-	while(v != 0) {
-		r.push_back(v % 10);
-		v /= 10;
-	}
-	
-	return r;
-}
-
-bool isSameVector(vector<int> a, vector<int> b) {
-	int i;
-	
-	if(a.size() != b.size())
-		return false;
-	
-	for(i = 0; i < a.size(); i++) {
-		if(a[i] != b[i])
-			return false;
-	}
-	
-	return true;
-}
 
 int findSmallest(int l) {
 	int i, j, c;
@@ -46,16 +23,16 @@ int findSmallest(int l) {
 	c = pow(10, l) / 6;
 	
 	for(i = pow(10, l - 1); i < c; i++) {
-		v = toVector(i);
+		v = IamLupo::Vector::to(i);
 		f = true;
 		
 		sort(v.begin(), v.end());
 		
 		for(j = 2; j <= l; j++) {
-			t = toVector(j * i);
+			t = IamLupo::Vector::to(j * i);
 			sort(t.begin(), t.end());
 			
-			if(!isSameVector(v, t))
+			if(!IamLupo::Vector::same(v, t))
 				f = false;
 		}
 		
