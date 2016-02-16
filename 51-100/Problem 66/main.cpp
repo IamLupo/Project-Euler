@@ -47,12 +47,14 @@ long long findLargest(int l) {
 					}
 					
 					f = true;
+				} else {	
+					//We can skip all even generations
+					IamLupo::Sqrt::Expo_Next(exp);
+					IamLupo::Sqrt::Expo_Next(exp);
 				}
 				
-				//We can skip all even generations
-				IamLupo::Sqrt::Expo_Next(exp);
-				IamLupo::Sqrt::Expo_Next(exp);
 			}
+			IamLupo::Sqrt::clear(exp);
 		}
 		else if(l >= 10)
 			d += 4;
