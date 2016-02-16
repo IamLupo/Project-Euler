@@ -7,22 +7,13 @@
 #include <string.h>
 
 #include "gmp.h"
+#include "string.h"
 
 using namespace std;
 
 /*
 	How many Lychrel numbers are there below ten-thousand?
 */
-
-bool isPalindrome(string v) {
-	int i;
-	
-	for(i = 0; i < v.size() / 2; i++)
-		if(v[i] != v[v.size() - 1 - i])
-			return false;
-	
-	return true;
-} 
 
 int countLychrelNumbers(int l, int it) {
 	int i, j, c;
@@ -59,7 +50,7 @@ int countLychrelNumbers(int l, int it) {
 			v[j] = buffer;
 			
 			//Check if Palindrome
-			if(!isPalindrome(v[j]))
+			if(!IamLupo::String::isPalindrome(v[j]))
 				t.push_back(v[j]);
 		}
 		v = t;
