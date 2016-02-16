@@ -76,6 +76,13 @@ IamLupo::Sqrt::ExponentialE IamLupo::Sqrt::Expo_Init(const IamLupo::Sqrt::CFract
 	return r;
 }
 
+void IamLupo::Sqrt::clear(IamLupo::Sqrt::ExponentialE &r) {
+	mpz_clear(r.x1);
+	mpz_clear(r.x2);
+	mpz_clear(r.y1);
+	mpz_clear(r.y2);
+}
+
 void IamLupo::Sqrt::Expo_Next(IamLupo::Sqrt::ExponentialE &exp) {
 	mpz_t t;
 	
@@ -104,4 +111,6 @@ void IamLupo::Sqrt::Expo_Next(IamLupo::Sqrt::ExponentialE &exp) {
 	
 	//Next id
 	exp.level = (exp.level + 1) % (exp.fr.size() - 1);
+	
+	mpz_clear(t);
 }

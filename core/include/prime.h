@@ -1,10 +1,12 @@
 #include <vector>
 
 namespace IamLupo {
+	typedef std::vector<long long> Primes;
+	
 	namespace Prime {
-		static std::vector<long long> v;
+		bool isPrime(const Primes &p, long long v);
+		void generate(Primes &p, int l);
 		
-		bool isPrime(long long v);
-		void generate(int l);
+		bool isConcatenate(const IamLupo::Primes &p, const std::vector<int> &r, int v);
 	}
 }

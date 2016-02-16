@@ -17,6 +17,7 @@ namespace IamLupo {
 		CFraction ContinuedFraction(long long s);
 		
 		ExponentialE Expo_Init(const CFraction &fr);
-		void Expo_Next(ExponentialE &fr);
+		void clear(ExponentialE &r);
+		void Expo_Next(ExponentialE &exp);
 	}
 }
