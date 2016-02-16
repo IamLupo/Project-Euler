@@ -14,6 +14,18 @@ long long IamLupo::Number::to(const std::vector<int> &v) {
 	return r;
 }
 
+long long IamLupo::Number::sum(const std::string &s) {
+	int i;
+	long long r;
+	
+	r = 0;
+	
+	for(i = 0; i < s.size(); i++)
+		r += s[i] - 48;
+	
+	return r;
+}
+
 long long IamLupo::Number::sum(const std::vector<int> &v) {
 	int i;
 	long long r;
