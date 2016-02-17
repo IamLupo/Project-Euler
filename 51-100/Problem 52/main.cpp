@@ -6,7 +6,7 @@
 #include <fstream>
 #include <string.h>
 
-#include "vector.h"
+#include "IamLupo/vector.h"
 
 using namespace std;
 

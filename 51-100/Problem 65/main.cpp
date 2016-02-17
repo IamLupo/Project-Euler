@@ -1,8 +1,8 @@
 #include <iostream>
 #include <vector>
 
-#include "sqrt.h"
-#include "number.h"
+#include "IamLupo/sqrt.h"
+#include "IamLupo/number.h"
 
 using namespace std;
 

@@ -1,4 +1,4 @@
-#include "string.h"
+#include "IamLupo/string.h"
 
 bool IamLupo::String::isPalindrome(const std::string &s) {
 	int i, l;

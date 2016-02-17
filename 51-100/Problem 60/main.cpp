@@ -8,8 +8,8 @@
 
 #include "gmp.h"
 
-#include "prime.h"
-#include "number.h"
+#include "IamLupo/prime.h"
+#include "IamLupo/number.h"
 
 using namespace std;
 

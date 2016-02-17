@@ -7,7 +7,7 @@
 #include <string.h>
 
 #include "gmp.h"
-#include "string.h"
+#include "IamLupo/string.h"
 
 using namespace std;
 

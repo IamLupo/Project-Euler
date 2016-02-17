@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "prime.h"
+#include "IamLupo/prime.h"
 
 using namespace std;
 

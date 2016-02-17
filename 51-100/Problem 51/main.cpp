@@ -6,9 +6,9 @@
 #include <fstream>
 #include <string.h>
 
-#include "number.h"
-#include "vector.h"
-#include "prime.h"
+#include "IamLupo/number.h"
+#include "IamLupo/vector.h"
+#include "IamLupo/prime.h"
 
 using namespace std;
 

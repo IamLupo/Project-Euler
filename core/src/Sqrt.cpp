@@ -1,5 +1,6 @@
 #include <math.h>
-#include "sqrt.h"
+
+#include "IamLupo/sqrt.h"
 
 /*
 	Continued fraction expansion

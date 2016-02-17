@@ -1,6 +1,6 @@
 #include <math.h>
 
-#include "number.h"
+#include "IamLupo/number.h"
 
 long long IamLupo::Number::to(const std::vector<int> &v) {
 	int i;

@@ -3,5 +3,6 @@ g++ -c src/String.cpp -o tmp/String.o -I "./include" --std=c++11
 g++ -c src/Prime.cpp -o tmp/Prime.o -I "./include" --std=c++11
 g++ -c src/Number.cpp -o tmp/Number.o -I "./include" --std=c++11
 g++ -c src/Vector.cpp -o tmp/Vector.o -I "./include" --std=c++11
-\
-ar rcs lib/libiamlupo.a tmp/Sqrt.o tmp/String.o tmp/Prime.o tmp/Number.o tmp/Vector.o
+g++ -c src/Math.cpp -o tmp/Math.o -I "./include" --std=c++11
+
+ar rcs lib/libiamlupo.a tmp/Sqrt.o tmp/String.o tmp/Prime.o tmp/Number.o tmp/Vector.o tmp/Math.o

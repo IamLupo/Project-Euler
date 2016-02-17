@@ -1,5 +1,5 @@
-#include "prime.h"
-#include "number.h"
+#include "IamLupo/prime.h"
+#include "IamLupo/number.h"
 
 bool IamLupo::Prime::is(const Primes &p, long long v) {
 	int i;
