@@ -20,3 +20,15 @@ long long IamLupo::Math::gcdr(long long a, long long b) {
 	
 	return gcdr(b % a, a);
 }
+
+long long IamLupo::Math::phi(long long n) {
+	long long i, x;
+
+	x = 0;
+
+	for(i = 1; i <= n; i++)
+		if(IamLupo::Math::gcd(n, i) == 1)
+			x++;
+	
+	return x;
+}
