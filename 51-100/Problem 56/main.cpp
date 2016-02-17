@@ -7,6 +7,7 @@
 #include <string.h>
 
 #include "gmp.h"
+#include "number.h"
 
 using namespace std;
 
@@ -14,17 +15,6 @@ using namespace std;
 	Considering natural numbers of the form, ab, where a, b < 100,
 	what is the maximum digital sum?
 */
-
-int sumDigit(string v) {
-	int i, s;
-	
-	s = 0;
-	
-	for(i = 0; i < v.size(); i++)
-		s += v[i] - 48;
-	
-	return s;
-}
 
 int countMaxDigits(int l) {
 	int i, j, c, h;
@@ -47,7 +37,7 @@ int countMaxDigits(int l) {
 			mpz_get_str(buffer, 10, b);
 			
 			//Calc the sum of digits
-			c = sumDigit(buffer);
+			c = IamLupo::Number::sum(buffer);
 			
 			//if a higher value is found save it
 			if(h < c)

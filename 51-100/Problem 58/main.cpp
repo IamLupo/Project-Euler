@@ -9,6 +9,8 @@ using namespace std;
 	primes along both diagonals first falls below 10%?
 */
 
+static IamLupo::Primes primes;
+
 int countBiggerNumeratorDigit() {
 	int i, c, d;
 	long long v;
@@ -23,22 +25,22 @@ int countBiggerNumeratorDigit() {
 		d += 2;
 		
 		v += d;
-		if(IamLupo::Prime::isPrime(v))
+		if(IamLupo::Prime::is(primes, v))
 			c++;
 		i++;
 		
 		v += d;
-		if(IamLupo::Prime::isPrime(v))
+		if(IamLupo::Prime::is(primes, v))
 			c++;
 		i++;
 		
 		v += d;
-		if(IamLupo::Prime::isPrime(v))
+		if(IamLupo::Prime::is(primes, v))
 			c++;
 		i++;
 
 		v += d;
-		if(IamLupo::Prime::isPrime(v))
+		if(IamLupo::Prime::is(primes, v))
 			c++;
 		i++;
 	} while(i < c * 10);
@@ -47,7 +49,7 @@ int countBiggerNumeratorDigit() {
 }
 
 int main() {
-	IamLupo::Prime::generate(260);
+	IamLupo::Prime::generate(primes, 260);
 
 	cout << "result = " << countBiggerNumeratorDigit() << endl;
 	

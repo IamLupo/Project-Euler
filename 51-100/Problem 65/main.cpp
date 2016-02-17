@@ -2,7 +2,7 @@
 #include <vector>
 
 #include "sqrt.h"
-#include "string.h"
+#include "number.h"
 
 using namespace std;
 
@@ -41,7 +41,7 @@ int sumDigitsNumerator(int l) {
 	for(i = 1; i < l; i++)
 		IamLupo::Sqrt::Expo_Next(exp);
 	
-	return IamLupo::String::addIntegers(mpz_get_str(nullptr, 10, exp.x2));
+	return IamLupo::Number::sum(mpz_get_str(nullptr, 10, exp.x2));
 }
 
 int main() {

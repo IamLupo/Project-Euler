@@ -7,26 +7,13 @@
 #include <string.h>
 
 #include "gmp.h"
+#include "string.h"
 
 using namespace std;
 
 /*
 	What is the message in "cipher.txt" ?
 */
-
-const vector<string> explode(const string &s, const char &c) {
-	string buff{""};
-	vector<string> v;
-	
-	for(auto n:s)
-	{
-		if(n != c) buff+=n; else
-		if(n == c && buff != "") { v.push_back(buff); buff = ""; }
-	}
-	if(buff != "") v.push_back(buff);
-	
-	return v;
-}
 
 vector<int> readFile(string &f) {
 	int i;
@@ -42,7 +29,7 @@ vector<int> readFile(string &f) {
 			getline(file, v);
 			
 			if(v.size() > 1) {
-				t = explode(v, ',');
+				t = IamLupo::String::explode(v, ',');
 			}
 		}
 	}
