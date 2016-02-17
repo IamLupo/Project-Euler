@@ -27,7 +27,6 @@ long long countProperFractions(int l) {
 }
 
 int main() {
-	cout << "result = " << countProperFractions(8) << endl;
 	cout << "result = " << countProperFractions(1000000) << endl;
 	
 	return 0;
