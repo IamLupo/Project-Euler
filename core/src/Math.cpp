@@ -66,3 +66,18 @@ long long IamLupo::Math::phi(long long n) {
 	
 	return r; 
 }
+
+
+/*
+	https://en.wikipedia.org/wiki/Factorial
+*/
+long long IamLupo::Math::factorial(long long n) {
+	long long i, r;
+	
+	r = 1;
+	
+	for(i = 2; i <= n; i++)
+		r *= i;
+	
+	return r;
+}

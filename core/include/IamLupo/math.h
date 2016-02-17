@@ -4,5 +4,7 @@ namespace IamLupo {
 		long long gcdr(long long a, long long b);
 		
 		long long phi(long long n);
+		
+		long long factorial(long long n);
 	}
 }
