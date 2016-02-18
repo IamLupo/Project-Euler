@@ -5,9 +5,6 @@
 #include <string.h>
 #include <stdlib.h>
 
-#include "IamLupo/prime.h"
-#include "IamLupo/math.h"
-
 using namespace std;
 
 /*
