@@ -81,3 +81,10 @@ long long IamLupo::Math::factorial(long long n) {
 	
 	return r;
 }
+
+/*
+	https://en.wikipedia.org/wiki/Pentagonal_number
+*/
+long long IamLupo::Math::pentagonal(long long n) {
+	return (3 * n * n - n) / 2;
+}
