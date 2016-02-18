@@ -10,8 +10,8 @@
 using namespace std;
 
 /*
-	How many different ways can one hundred be written as
-	a sum of at least two positive integers?
+	What is the first value which can be written as the sum of
+	primes in over five thousand different ways?
 */
 
 static IamLupo::Primes primes;
