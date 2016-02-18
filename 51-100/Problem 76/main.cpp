@@ -14,12 +14,10 @@ using namespace std;
 
 int countWays(int n) {
 	int i, j;
-	vector<long long> a;
+	vector<long long> a(n + 1, 0);
 	
 	//Init
-	a.push_back(1);
-	for(i = 1; i < n; i++)
-		a.push_back(0);
+	a[0] = 1;
 	
 	//Calc
 	for(i = 1; i < n; i++) {
