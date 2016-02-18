@@ -5,7 +5,6 @@
 #include <string.h>
 #include <stdlib.h>
 
-#include "IamLupo/prime.h"
 #include "IamLupo/math.h"
 
 using namespace std;
@@ -31,8 +30,6 @@ using namespace std;
 		L = 2m^2 + 2mn
 		L = 2m(m + n)
 */
-
-static IamLupo::Primes primes;
 
 int countUniqueTriangleSideLength(int l) {
 	long long a, b, c, m, n, k, t, v;
@@ -74,8 +71,6 @@ int countUniqueTriangleSideLength(int l) {
 }
 
 int main() {
-	IamLupo::Prime::generate(primes, 100);
-	
 	cout << "result = " << countUniqueTriangleSideLength(1500000) << endl;
 
 	return 0;
