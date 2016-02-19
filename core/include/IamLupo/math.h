@@ -6,7 +6,5 @@ namespace IamLupo {
 		long long phi(long long n);
 		
 		long long factorial(long long n);
-		
-		long long pentagonal(long long n);
 	}
 }
