@@ -39,8 +39,7 @@ void brutforce(vector<int> &r, int* m, int index, int max) {
 			if there is no known max value we will run this
 			if s + next prime is still lower then the max value
 	*/
-	while(  (*m == -1 && primes[index] != 0) ||
-			(*m < s + primes[index] && primes[index] != 0)) {
+	while(index < primes.size() && (*m == -1 || *m < s + primes[index])) {
 		
 		/*
 			check if index prime will be fit with the already found primes list
@@ -72,7 +71,7 @@ int sumConcatenatePrimes(int l) {
 }
 
 int main() {
-	IamLupo::Prime::generate(primes, 100);
+	primes = IamLupo::Prime::generate(100);
 	
 	cout << "result = " << sumConcatenatePrimes(5) << endl;
 	

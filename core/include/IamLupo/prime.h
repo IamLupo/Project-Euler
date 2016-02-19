@@ -5,8 +5,8 @@ namespace IamLupo {
 	
 	namespace Prime {
 		bool is(const Primes &p, long long v);
-		void generate(Primes &p, int l);
+		Primes generate(int l);
 		
-		bool isConcatenate(const IamLupo::Primes &p, const std::vector<int> &r, int v);
+		bool isConcatenate(const Primes &p, const std::vector<int> &r, int v);
 	}
 }

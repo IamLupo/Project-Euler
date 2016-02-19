@@ -1,19 +1,32 @@
+#include <algorithm>
+#include <math.h>
+
 #include "IamLupo/prime.h"
 #include "IamLupo/number.h"
 
-bool IamLupo::Prime::is(const Primes &p, long long v) {
+bool IamLupo::Prime::is(const IamLupo::Primes &p, long long v) {
 	int i;
+	std::vector<long long>::const_iterator it;
 	
-	for(i = 0; i < p.size() && p[i] < v / 2; i++)
-		if(v % p[i] == 0)
-			return false;
+	if(v <= p.back()) {
+		it = std::find(p.begin(), p.end(), v);
+		
+		if(it != p.end())
+			return true;
 	
-	return true;
+		return false;
+	} else {
+		for(i = 0; i < p.size() && p[i] <= sqrt(v); i++)
+			if(v % p[i] == 0)
+				return false;
+		
+		return true;
+	}
 }
 
-void IamLupo::Prime::generate(Primes &p, int l) {
+IamLupo::Primes IamLupo::Prime::generate(int l) {
 	int i, j;
-	std::vector<long long> a, b;
+	IamLupo::Primes a, b;
 	
 	for(i = 2; i <= l * l; i++)
 		a.push_back(i);
@@ -27,7 +40,7 @@ void IamLupo::Prime::generate(Primes &p, int l) {
 		b.clear();
 	}
 	
-	p = a;
+	return a;
 }
 
 /*

@@ -49,7 +49,7 @@ int findFirst(int l) {
 }
 
 int main() {
-	IamLupo::Prime::generate(primes, 100);
+	primes = IamLupo::Prime::generate(100);
 	
 	cout << "result = " << findFirst(5000) << endl;
 

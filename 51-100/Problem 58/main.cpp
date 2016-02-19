@@ -49,7 +49,7 @@ int countBiggerNumeratorDigit() {
 }
 
 int main() {
-	IamLupo::Prime::generate(primes, 260);
+	primes = IamLupo::Prime::generate(260);
 
 	cout << "result = " << countBiggerNumeratorDigit() << endl;
 	

@@ -44,7 +44,7 @@ int getMinimumPhiPermutation(int l) {
 }
 
 int main() {
-	IamLupo::Prime::generate(primes, 60);
+	primes = IamLupo::Prime::generate(60);
 	
 	cout << "result = " << getMinimumPhiPermutation(10000000) << endl;
 	

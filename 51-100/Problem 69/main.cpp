@@ -37,7 +37,7 @@ double getHighestPhiValue(int l) {
 }
 
 int main() {
-	IamLupo::Prime::generate(primes, 100);
+	primes = IamLupo::Prime::generate(100);
 	
 	cout << "result = " << getHighestPhiValue(1000000) << endl;
 	
