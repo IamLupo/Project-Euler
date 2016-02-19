@@ -8,8 +8,25 @@ long long IamLupo::Number::to(const std::vector<int> &v) {
 	
 	r = 0;
 	
-	for(i = 0; i < v.size(); i++)
-		r += v[i] * pow(10, i);
+	for(i = v.size(); i > 0; i--)
+		r += v[i - 1] * pow(10, i - 1);
+	
+	return r;
+}
+
+long long IamLupo::Number::to(const std::string &s) {
+	int i, p;
+	long long r;
+	
+	p = 0;
+	r = 0;
+	
+	for(i = s.size(); i > 0; i--) {
+		if(s[i - 1] >= 0x30 && s[i - 1] <= 0x39) {
+			r += (s[i - 1] - 0x30) * pow(10, p);
+			p++;
+		}
+	}
 	
 	return r;
 }

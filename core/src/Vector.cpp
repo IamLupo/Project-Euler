@@ -1,3 +1,5 @@
+#include <algorithm>
+
 #include "IamLupo/vector.h"
 
 std::vector<int> IamLupo::Vector::to(long long v) {
@@ -7,6 +9,8 @@ std::vector<int> IamLupo::Vector::to(long long v) {
 		r.push_back(v % 10);
 		v /= 10;
 	}
+	
+	std::reverse(r.begin(), r.end());
 	
 	return r;
 }

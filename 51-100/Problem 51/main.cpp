@@ -50,6 +50,7 @@ int findSmallestFamily(int target, int l) {
 	
 	for(i = 0; i < primes.size(); i++) {
 		t = IamLupo::Vector::to(primes[i]);
+		reverse(t.begin(), t.end());
 		v = findRepetition(t);
 
 		if( primes[i] >= pow(10, l - 1) &&
