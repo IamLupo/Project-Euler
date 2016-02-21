@@ -28,3 +28,17 @@ bool IamLupo::Vector::same(std::vector<int> a, std::vector<int> b) {
 	
 	return true;
 }
+
+std::vector<std::vector<int>> IamLupo::Vector::mirror(std::vector<std::vector<int>> v) {
+	int i, j;
+	std::vector<int> t;
+	std::vector<std::vector<int>> r;
+	
+	for(i = v.size(); i > 0; i--) {
+		t = v[i - 1];
+		std::reverse(t.begin(), t.end());
+		r.push_back(t);
+	}
+	
+	return r;
+}
