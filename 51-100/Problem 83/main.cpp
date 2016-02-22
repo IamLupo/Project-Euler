@@ -117,8 +117,6 @@ int smallestRouteFile(const string &f) {
 }
 
 int main() {
-	//cout << "result = " << smallestRouteFile("test.txt") << endl;
-	
 	cout << "result = " << smallestRouteFile("matrix.txt") << endl;
 	
 	return 0;
