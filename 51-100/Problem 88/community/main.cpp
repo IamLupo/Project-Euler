@@ -9,7 +9,7 @@ static int a[12100];
 
 void dfs(int p, int s, int n, int c) {
     int u;
-	
+
 	if(c >= 2 && p < a[p - s + c])
 		a[p - s + c] = p;
 
@@ -20,20 +20,20 @@ void dfs(int p, int s, int n, int c) {
 
 int main() {
 	int i, sum;
-    set<int> st;
-	
-    for(i = 2; i <= 12000; i++)
-        a[i] = INT_MAX;
-	
-    for(i = 2; i < 120; i++)
-        dfs(i, i, i, 1);
+	set<int> st;
 
-    for(i = 2; i <= 12000; i++)
-        st.insert(a[i]);
+	for(i = 2; i <= 12000; i++)
+		a[i] = INT_MAX;
 
-    sum = 0;
-    for(auto it = st.begin(); it != st.end(); it++)
-        sum += *it;
+	for(i = 2; i < 120; i++)
+		dfs(i, i, i, 1);
 
-    cout << sum << endl;
+	for(i = 2; i <= 12000; i++)
+		st.insert(a[i]);
+
+	sum = 0;
+	for(auto it = st.begin(); it != st.end(); it++)
+		sum += *it;
+
+	cout << sum << endl;
 }
