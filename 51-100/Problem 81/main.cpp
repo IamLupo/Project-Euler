@@ -17,7 +17,6 @@ using namespace std;
 */
 
 typedef vector<vector<int>> Grid;
-typedef vector<int> Level;
 
 Grid readFile(const string &f) {
 	int i;
@@ -49,62 +48,30 @@ Grid readFile(const string &f) {
 	return r;
 }
 
-Level nextLevel1(const Grid &v, const Level &l) {
-	int i, j, x, y;
-	Level r;
-	
-	x = 0;
-	y = l.size();
-	
-	for(i = 0; i <= l.size(); i++) {
-		if(i == 0)
-			r.push_back(v[y][x] + l[i]);
-		else if(i == l.size())
-			r.push_back(v[y][x] + l[i - 1]);
-		else
-			r.push_back((l[i] < l[i - 1]) ? v[y][x] + l[i] : v[y][x] + l[i - 1]);
-		
-		x++;
-		y--;
-	}
-	
-	return r;
-}
-
-Level nextLevel2(const Grid &v, const Level &l) {
-	int i, x, y;
-	Level r;
-	
-	x = v.size() - l.size() + 1;
-	y = v.size() - 1;
-	
-	for(i = 0; i < l.size() - 1; i++) {
-		r.push_back((l[i] < l[i + 1]) ? v[y][x] + l[i] : v[y][x] + l[i + 1]);
-
-		x++;
-		y--;
-	}
-	
-	return r;
-}
-
 int smallestRouteFile(const string &f) {
-	int i, j, r;
-	Grid v;
-	Level l;
+	int i, x, y;
+	Grid g;
 	
-	v = readFile(f);
-	l = {v[0][0]};
+	g = readFile(f);
 	
-	for(i = 0; i < v.size() - 1; i++)
-		l = nextLevel1(v, l);
+	for(i = 1; i < (g.size() * 2) - 1; i++) {
+		x = (i < g.size()) ? 0 : i - g.size() + 1;
+		y = (i < g.size()) ? i : g.size() - 1;
+		
+		while(y >= 0 && x < g.size()) {
+			if(y - 1 < 0)
+				g[y][x] += g[y][x - 1];
+			else if(x - 1 < 0)
+				g[y][x] += g[y - 1][x];
+			else 
+				g[y][x] += (g[y - 1][x] < g[y][x - 1]) ? g[y - 1][x] : g[y][x - 1];
+			
+			x++;
+			y--;
+		}
+	}
 	
-	for(i = 0; i < v.size() - 1; i++)
-		l = nextLevel2(v, l);
-	
-	sort(l.begin(), l.end());
-	
-	return l[0];
+	return g[g.size() - 1][g.size() - 1];
 }
 
 int main() {
