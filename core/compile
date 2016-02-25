@@ -7,5 +7,6 @@ g++ -c src/Math.cpp -o tmp/Math.o -I "./include" --std=c++11
 g++ -c src/Permutation.cpp -o tmp/Permutation.o -I "./include" --std=c++11
 g++ -c src/Pentagonal.cpp -o tmp/Pentagonal.o -I "./include" --std=c++11
 g++ -c src/Triangular.cpp -o tmp/Triangular.o -I "./include" --std=c++11
+g++ -c src/Roman.cpp -o tmp/Roman.o -I "./include" --std=c++11
 
-ar rcs lib/libiamlupo.a tmp/Sqrt.o tmp/String.o tmp/Prime.o tmp/Number.o tmp/Vector.o tmp/Math.o tmp/Permutation.o tmp/Pentagonal.o tmp/Triangular.o
+ar rcs lib/libiamlupo.a tmp/Sqrt.o tmp/String.o tmp/Prime.o tmp/Number.o tmp/Vector.o tmp/Math.o tmp/Permutation.o tmp/Pentagonal.o tmp/Triangular.o tmp/Roman.o
