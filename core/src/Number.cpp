@@ -14,6 +14,22 @@ long long IamLupo::Number::to(const std::vector<int> &v) {
 	return r;
 }
 
+long long IamLupo::Number::to(const std::set<int> &v) {
+	int i;
+	long long r;
+	std::set<int>::iterator it;
+	
+	i = v.size();
+	r = 0;
+	
+	for(it = v.begin(); it != v.end(); ++it) {
+		r += *it * pow(10, i - 1);
+		i--;
+	}
+	
+	return r;
+}
+
 long long IamLupo::Number::to(const std::string &s) {
 	int i, p;
 	long long r;
