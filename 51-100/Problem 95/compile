@@ -1,2 +1,1 @@
 g++ main.cpp -o main -L "../../core/lib" -I "../../core/include" -liamlupo --std=c++11 -lgmp -O2
-g++ generate.cpp -o generate --std=c++11 -O2

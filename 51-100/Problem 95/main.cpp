@@ -8,6 +8,7 @@
 #include <stdlib.h>
 
 #include "IamLupo/number.h"
+#include "IamLupo/divider.h"
 
 using namespace std;
 
@@ -15,28 +16,6 @@ using namespace std;
 	Find the smallest member of the longest amicable chain with no element
 	exceeding one million.
 */
-
-vector<int> readFile(const string &f) {
-	string v;
-	vector<int> r;
-	ifstream file(f);
-	
-	r.push_back(0);
-	
-	if(file.is_open()) {
-		while(file.good()) {
-			//Read line
-			getline(file, v);
-			
-			//Convert and Save
-			r.push_back(IamLupo::Number::to(v));
-		}
-	}
-	
-	file.close();
-	
-	return r;
-}
 
 vector<int> chain(const vector<int> &d, int n) {
 	int v;
@@ -74,14 +53,14 @@ vector<int> chain(const vector<int> &d, int n) {
 	return {0};
 }
 
-int findAmicableChain(const string &f) {
+int findAmicableChain(int l) {
 	int i, h, r;
 	vector<int> d, t;
 	
 	//Init
 	h = 0;
 	r = 0;
-	d = readFile(f);
+	d = IamLupo::Divider::generate_sum(l - 1);
 	
 	for(i = 1; i < d.size(); i++) {
 		t = chain(d, i);
@@ -96,7 +75,7 @@ int findAmicableChain(const string &f) {
 }
 
 int main() {
-	cout << "result = " << findAmicableChain("data.txt") << endl;
+	cout << "result = " << findAmicableChain(1000000) << endl;
 	
 	return 0;
 }
