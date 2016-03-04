@@ -32,7 +32,7 @@ using namespace std;
 	
 	Generated Data:
 		These are some valid Almost equilateral triangle. But at higher scale
-		the double will be out of range this will cause for problems
+		the double will not be precise anymore.
 		
 		a		b		c
 		3		4		5
@@ -43,7 +43,8 @@ using namespace std;
 		1680	2911	3361
 
 	Conclusion:
-		With Eureqa we can find a pattern in the data
+		With Eureqa we can find a pattern in the data.
+		This way we can keep working with integer variables.
 		
 		Init:
 			a = 3
