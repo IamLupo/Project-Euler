@@ -33,16 +33,23 @@ long long IamLupo::Number::to(const std::set<int> &v) {
 long long IamLupo::Number::to(const std::string &s) {
 	int i, p;
 	long long r;
+	bool neg;
 	
 	p = 0;
 	r = 0;
+	neg = false;
 	
 	for(i = s.size(); i > 0; i--) {
 		if(s[i - 1] >= 0x30 && s[i - 1] <= 0x39) {
 			r += (s[i - 1] - 0x30) * pow(10, p);
 			p++;
 		}
+		else if(s[i - 1] == 0x2D)
+			neg = true;
 	}
+	
+	if(neg)
+		r *= -1;
 	
 	return r;
 }
