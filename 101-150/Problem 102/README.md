@@ -5,11 +5,11 @@ Consider the following two triangles:
 
 A(-340,495), B(-153,-910), C(835,-947)
 
-![alt tag](Triangle ABC.png)
+![alt tag](http://gitlab.ludoruisch.nl/root/Project-Euler/blob/e86107e43885051fc7ff4022de83908888432cf3/101-150/Problem%20102/Triangle%20ABC.png)
 
 X(-175,41), Y(-421,-714), Z(574,-645)
 
-![alt tag](Triangle XYZ.png)
+![alt tag](http://gitlab.ludoruisch.nl/root/Project-Euler/blob/e86107e43885051fc7ff4022de83908888432cf3/101-150/Problem%20102/Triangle%20XYZ.png)
 
 It can be verified that triangle ABC contains the origin, whereas triangle XYZ does not.
 
