@@ -4,42 +4,15 @@
 #include <math.h>
 #include <numeric>
 
+#include "IamLupo/prime.h"
+
 using namespace std;
 
 /*
 	What is the value of the first triangle number to have over five hundred divisors?
 */
 
-static vector<int> primes;
-
-bool isPrime(int v) {
-	vector<int>::iterator it;
-	
-	it = find(primes.begin(), primes.end(), v);
-	if(it != primes.end())
-		return true;
-	
-	return false;
-}
-
-void genPrime(int m) {
-	int i, j;
-	vector<int> a, b;
-	
-	for(i = 2; i <= m * m; i++)
-		a.push_back(i);
-	
-	for(i = 2; i <= m; i++) {
-		for(j = 0; j < a.size(); j++) {
-			if(a[j] % i != 0 || a[j] <= i)
-				b.push_back(a[j]);
-		}
-		a = b;
-		b.clear();
-	}
-	
-	primes = a;
-}
+static IamLupo::Primes primes;
 
 long long firstDivider2(int r) {
 	int i, x, c, e;
@@ -62,7 +35,7 @@ long long firstDivider2(int r) {
 			}
 			
 			//When the prime divisor would be greater than the residual t, 
-			//that residual t is the last prime factor with an e=1 
+			//that residual t is the last prime factor with an e = 1 
 			//No necessity to identify it.
 			e = 1;
 			while(t % primes[i] == 0) {
@@ -108,7 +81,7 @@ int firstDivider(int s) {
 }
 
 int main() {
-	genPrime(1000);
+	primes = IamLupo::Prime::generate(100);
 	
 	cout << "result = " << firstDivider2(500) << endl;
 
