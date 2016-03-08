@@ -15,6 +15,16 @@ std::vector<int> IamLupo::Vector::to(long long v) {
 	return r;
 }
 
+std::vector<long long> IamLupo::Vector::add(const std::vector<long long> &v) {
+	int i;
+	std::vector<long long> r;
+	
+	for(i = 0; i < v.size() - 1; i++)
+		r.push_back(v[i] + v[i + 1]);
+	
+	return r;
+}
+
 bool IamLupo::Vector::same(std::vector<int> a, std::vector<int> b) {
 	int i;
 	
