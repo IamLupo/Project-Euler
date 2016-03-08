@@ -7,7 +7,8 @@
 #include <string.h>
 #include <stdlib.h>
 
-#include "gmp.h"
+#include "IamLupo/number.h"
+#include "IamLupo/string.h"
 
 using namespace std;
 
@@ -15,62 +16,44 @@ using namespace std;
 	Find the maximum total from top to bottom of the triangle.
 */
 
-typedef vector<int> TriangleLevel;
-typedef vector<TriangleLevel> Triangle;
-
-const vector<string> explode(const string &s, const char &c) {
-	string buff{""};
-	vector<string> v;
-	
-	for(auto n:s)
-	{
-		if(n != c) buff+=n; else
-		if(n == c && buff != "") { v.push_back(buff); buff = ""; }
-	}
-	if(buff != "") v.push_back(buff);
-	
-	return v;
-}
+typedef vector<int> Level;
+typedef vector<Level> Triangle;
 
 Triangle readFile(const string &f) {
-	int i, n;
-	string::size_type sz;
-	string line;
+	int i;
+	string v;
 	vector<string> r;
-	TriangleLevel trl;
-	Triangle tr;
+	Level l;
+	Triangle t;
 	
 	ifstream file(f);
 	
 	if(file.is_open()) {
 		while(file.good()) {
-			getline(file, line);
+			getline(file, v);
 			
-			if(line.size() > 1) {
-				trl.clear();
-				r = explode(line, ' ');
+			if(v.size() > 1) {
+				l.clear();
+				r = IamLupo::String::explode(v, ' ');
 				
 				for(i = 0; i < r.size(); i++) {
-					//Convert
-					n = stoi(r[i], &sz);
-					
 					//Save
-					trl.push_back(n);
+					l.push_back(IamLupo::Number::to(r[i]));
 				}
 				
-				tr.push_back(trl);
+				t.push_back(l);
 			}
 		}
 	}
 	
 	file.close();
 	
-	return tr;
+	return t;
 }
 
-TriangleLevel next(const TriangleLevel a, const TriangleLevel b) {
+Level next(const Level a, const Level b) {
 	int i, x, y;
-	TriangleLevel r;
+	Level r;
 	
 	for(i = 0; i < a.size(); i++) {
 		x = a[i] + b[i];
@@ -87,19 +70,18 @@ TriangleLevel next(const TriangleLevel a, const TriangleLevel b) {
 
 int getHighestSum(const string &f) {
 	int i, j, s;
-	TriangleLevel trl_next;
-	Triangle tr;
+	Level l_next;
+	Triangle t;
 	
-	tr = readFile(f);
-	s = tr.size();
+	t = readFile(f);
+	s = t.size();
 	
-	trl_next = tr[s - 1];
+	l_next = t[s - 1];
 	
-	for(i = 0; i < s - 1; i++) {
-		trl_next = next(tr[s - 2 - i], trl_next);
-	}
+	for(i = 0; i < s - 1; i++)
+		l_next = next(t[s - 2 - i], l_next);
 	
-	return trl_next[0];
+	return l_next[0];
 }
 
 int main() {
