@@ -1,6 +1,11 @@
-#include <algorithm>
-#include <string>
 #include <iostream>
+#include <vector>
+#include <algorithm>
+#include <math.h>
+#include <numeric>
+#include <fstream>
+#include <string.h>
+#include <stdlib.h>
 
 /*
 	What is the millionth lexicographic permutation of the digits?
@@ -8,15 +13,25 @@
 
 using namespace std;
 
-int main() {
-	int i = 0;
-	string s = "0123456789";
-
+string permutation(const string &s, int n) {
+	int i;
+	string r;
+	
+	//Init
+	i = 0;
+	r = s;
+	
 	do {
 		i++;
-		if(i == 1000000)
+		if(i == n)
 			break;
-	} while(next_permutation(s.begin(), s.end()));
+	} while(next_permutation(r.begin(), r.end()));
+	
+	return r;
+}
 
-	cout << s << '\n';
+int main() {
+	cout << "result = " << permutation("0123456789", 1000000) << '\n';
+	
+	return 0;
 }
