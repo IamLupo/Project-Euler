@@ -50,9 +50,9 @@ long long IamLupo::Divider::sum(long long v) {
 	return r;
 }
 
-std::vector<int> IamLupo::Divider::generate_sum(long long l) {
+IamLupo::Divider::Sum IamLupo::Divider::generate_sum(long long l) {
 	int i, j;
-	std::vector<int> r;
+	IamLupo::Divider::Sum r;
 	
 	for(i = 0; i <= l; i++)
 		r.push_back(0);
@@ -63,5 +63,30 @@ std::vector<int> IamLupo::Divider::generate_sum(long long l) {
 		}
 	}
 	
+	return r;
+}
+
+std::vector<int> IamLupo::Divider::getAbundant(long long l) {
+	int i;
+	std::vector<int> r;
+	IamLupo::Divider::Sum s;
+	
+	s = IamLupo::Divider::generate_sum(l);
+	
+	for(i = 0; i < s.size(); i++)
+		if(s[i] > i)
+			r.push_back(i);
+		
+	return r;
+}
+
+std::vector<int> IamLupo::Divider::getAbundant(IamLupo::Divider::Sum &s) {
+	int i;
+	std::vector<int> r;
+	
+	for(i = 0; i < s.size(); i++)
+		if(s[i] > i)
+			r.push_back(i);
+		
 	return r;
 }
