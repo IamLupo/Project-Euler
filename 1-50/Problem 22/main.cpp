@@ -1,9 +1,11 @@
 #include <iostream>
-#include <string>
 #include <vector>
 #include <algorithm>
+#include <math.h>
+#include <numeric>
 #include <fstream>
-#include <stdint.h>
+#include <string.h>
+#include <stdlib.h>
 
 /*
 	What is the total of all the name scores in the file?
@@ -11,42 +13,47 @@
 
 using namespace std;
 
-void readFile(vector<string>& list, const char* filename) {
+vector<string> readFile(const string &f) {
 	string temp;
+	vector<string> r;
 	
-	ifstream file(filename);
+	ifstream file(f);
 	
 	if(file.is_open()) {
 		while(file.good()) {
 			getline(file, temp, '"');
 			
 			if(temp.size() > 1) {
-				list.push_back(temp);
+				r.push_back(temp);
 			}
 		}
 	}
 	
 	file.close();
+	
+	return r;
 }
 
-uint64_t calcTotalNameScore(vector<string>& list) {
-	uint64_t score = 0;
+long long calcScore(const string &f) {
+	int i, j;
+	long long r;
+	vector<string> v;
 	
-	for(int i = 0; i < list.size(); i++)
-		for(std::string::iterator it = list[i].begin(); it != list[i].end(); ++it)
-			score += ((int)*it -  64) * (i + 1);
+	//Init
+	r = 0;
+	v = readFile(f);
 	
-	return score;
+	sort(v.begin(), v.end());
+	
+	for(i = 0; i < v.size(); i++)
+		for(j = 0; j != v[i].size(); j++)
+			r += ((int)v[i][j] -  64) * (i + 1);
+	
+	return r;
 }
 
 int main() {
-	int i;
-	vector<string> list;
-	
-	readFile(list, "names.txt");
-	sort(list.begin(), list.end());
-	
-	cout << calcTotalNameScore(list) << endl;
+	cout << calcScore("names.txt") << endl;
 
 	return 0;
 }
