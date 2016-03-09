@@ -1,81 +1,56 @@
 #include <iostream>
-#include <string>
 #include <vector>
 #include <algorithm>
+#include <math.h>
+#include <numeric>
 #include <fstream>
-#include <stdint.h>
+#include <string.h>
+#include <stdlib.h>
+
+#include "IamLupo/divider.h"
 
 /*
-	sum of the proper divisors:
-	28	>	1 + 2 + 4 + 7 + 14 = 28
-	
-	abundant number:
-	12	>	1 + 2 + 3 + 4 + 6 = 16
-	
 	Find the sum of all the positive integers which cannot be written
 	as the sum of two abundant numbers.
 */
 
+/*
+	Data:
+		sum of the proper divisors:
+		28	>	1 + 2 + 4 + 7 + 14 = 28
+		
+		abundant number:
+		12	>	1 + 2 + 3 + 4 + 6 = 16
+*/
+
 using namespace std;
 
-bool isAbundantNumber(int nr) {
-	int sum, i;
-	
-	sum = 1;
-	
-	for(i = 2; i <= (nr / 2); i++) {
-		if(nr % i == 0) {
-			sum += i;
-		}
-	}
-	
-	return (sum > nr);
-}
-
-bool addListToValue(vector<int>& list, int value) {
+long long sumNoneAbundant() {
 	int i, j;
-	
-	for(i = 0; i < list.size(); i++) {
-		if(list[i] > value)
-			return false;
-		
-		for(j = 0; j < list.size(); j++) {
-			if(list[i] + list[j] == value)
-				return true;
-			
-			if(list[i] + list[j] > value)
-				j = list.size();
-		}
-	}
-	
-	return false;
-}
-
-uint64_t sumNoneAbundantNumbers() {
-	int i;
-	uint64_t sum;
-	vector<int> list;
+	long long r;
+	vector<int> a;
+	vector<bool> v(28124, false);
 	
 	//Init
-	sum = 0;
+	r = 0;
+	a = IamLupo::Divider::getAbundant(28123);
 	
-	// Get All Abundant Numbers
-	for(i = 12; i <= 28123; i++) {
-		if(isAbundantNumber(i))
-			list.push_back(i);
-	}
+	//Generate all value that can be generated with two Abundant numbers
+	for(i = 0; i < a.size(); i++)
+		for(j = 0; j < a.size() && a[i] + a[j] <= 28123; j++)
+			if(!v[a[i] + a[j]])
+				v[a[i] + a[j]] = true;
+
+	//Add all numbers that can not be generated
+	for(i = 0; i < v.size(); i++)
+		if(!v[i])
+			r += i;
 	
-	//Find None Abundant Numbers
-	for(i = 1; i <= 28123; i++) {
-		if(!addListToValue(list, i))
-			sum += i;
-	}
-	
-	return sum;
+	return r;
 }
 
 int main() {
-	cout << sumNoneAbundantNumbers() << endl;
+	cout << "result = " << sumNoneAbundant() << endl;
 
 	return 0;
 }
