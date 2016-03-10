@@ -2,6 +2,10 @@
 #include <vector>
 #include <algorithm>
 #include <math.h>
+#include <numeric>
+#include <fstream>
+#include <string.h>
+#include <stdlib.h>
 
 using namespace std;
 
@@ -11,45 +15,43 @@ using namespace std;
 */
 
 static vector<int> options;
-static int result;
 
-void bruteforce(int v, int r, int level, int max) {
-	int i;
+int bruteforce(int v, int s, int l, int m) {
+	int i, r;
 	
-	if(level == max) {
-		if(v == r && v != 1)
-			result += v;
+	r = 0;
+	
+	if(l == m) {
+		if(v == s && v != 1)
+			return v;
 		
-		return;
+		return 0;
 	}
 	
 	for(i = 0; i < options.size(); i++)
-		bruteforce(
+		r += bruteforce(
 			v + options[i],
-			r + (i * pow(10, level)),
-			level + 1,
-			max
+			s + (i * pow(10, l)),
+			l + 1,
+			m
 		);
+		
+	return r;
 }
 
 int sumNumbersOfPowers(int d) {
 	int i;
-	
-	//Init
-	result = 0;
-	options.clear();
 	
 	//Calculate powers
 	for(i = 0; i < 10; i++)
 		options.push_back(pow(i, d));
 	
 	//Find numbers
-	bruteforce(0, 0, 0, d + 1);
+	return bruteforce(0, 0, 0, d + 1);
 }
 
 int main() {
-	sumNumbersOfPowers(5);
-	cout << "result = " << result << endl;
+	cout << "result = " << sumNumbersOfPowers(5) << endl;
 	
 	return 0;
 }
