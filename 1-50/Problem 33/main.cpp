@@ -3,6 +3,11 @@
 #include <algorithm>
 #include <math.h>
 #include <numeric>
+#include <fstream>
+#include <string.h>
+#include <stdlib.h>
+
+#include "IamLupo/math.h"
 
 using namespace std;
 
@@ -10,18 +15,6 @@ using namespace std;
 	If the product of these four fractions is given in its lowest common terms,
 	find the value of the denominator.
 */
-
-int gcd(int m, int n) {
-	int  r;
-
-	while (n != 0) {
-		r = m % n;
-		m = n;
-		n = r;
-	}
-	
-	return m;
-}
 
 int findDenominator() {
 	int a, b, i, j, k;
@@ -42,7 +35,7 @@ int findDenominator() {
 	}
 	
 	//Get denominator
-	a /= gcd(b, a);
+	a /= IamLupo::Math::gcd(b, a);
 	
 	return a;
 }
