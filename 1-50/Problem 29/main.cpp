@@ -1,6 +1,12 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
+#include <math.h>
+#include <numeric>
+#include <fstream>
+#include <string.h>
+#include <stdlib.h>
+#include <set>
 
 #include "gmp.h"
 
@@ -11,56 +17,29 @@ using namespace std;
 	for 2 ≤ a ≤ 100 and 2 ≤ b ≤ 100?
 */
 
-bool isUsed(mpz_t v, int index, vector<int> a_rules, vector<int> b_rules) {
+int countDistinctTerms(int l) {
 	int a, b;
-	mpz_t e;
+	mpz_t x, y;
+	set<string> r;
 	
 	//Init
-	a = index - 1;
-	b = b_rules[1];
-	mpz_init(e);
+	mpz_init(x);
+	mpz_init(y);
 	
-	while(a >= a_rules[0] && b >= b_rules[0]) {
-		mpz_set_ui(e, a);
-		mpz_pow_ui(e, e, b);
-		
-		if(mpz_cmp(e, v) == 0) {
-			return true;
-		} else if(mpz_cmp(e, v) > 0) {
-			b--;
-		} else {
-			a--;
-			b = b_rules[1];
-		}
-	}
-	
-	return false;
-}
-
-int countDistinctTerms(vector<int> a_rules, vector<int> b_rules) {
-	int a, b, r;
-	mpz_t e, e2;
-	
-	//Init
-	r = 0;
-	mpz_init(e);
-	mpz_init(e2);
-	
-	for(a = a_rules[0]; a <= a_rules[1]; a++) {
-		mpz_set_ui(e, a);
-		for(b = b_rules[0]; b <= b_rules[1]; b++) {
-			mpz_pow_ui(e2, e, b);
+	for(a = 2; a <= l; a++) {
+		mpz_set_ui(x, a);
+		for(b = 2; b <= l; b++) {
+			mpz_pow_ui(y, x, b);
 			
-			if(!isUsed(e2, a, a_rules, b_rules))
-				r++;
+			r.insert(mpz_get_str(nullptr, 10, y));
 		}
 	}
 	
-	return r;
+	return r.size();
 }
 
 int main() {
-	cout << "result = " << countDistinctTerms({2, 100}, {2, 100}) << endl;
+	cout << "result = " << countDistinctTerms(100) << endl;
 	
 	return 0;
 }
