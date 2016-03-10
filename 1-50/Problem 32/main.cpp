@@ -3,6 +3,10 @@
 #include <algorithm>
 #include <math.h>
 #include <numeric>
+#include <fstream>
+#include <string.h>
+#include <stdlib.h>
+#include <set>
 
 using namespace std;
 
@@ -14,13 +18,13 @@ using namespace std;
 		39 × 186 = 7254
 */
 
-int sumProductPandigital(vector<int> s) {
+int sumProductPandigital(int begin, int end) {
 	int i, a, b, c, d;
-	vector<int>::iterator it;
-	vector<int> l, r;
+	vector<int> l;
+	set<int> r;
 	
 	//Generate range
-	for(i = s[0]; i <= s[1]; i++)
+	for(i = begin; i <= end; i++)
 		l.push_back(i);
 	
 	//Find pandigital
@@ -30,12 +34,8 @@ int sumProductPandigital(vector<int> s) {
 		c = (l[1] * 1000) + (l[2] * 100) + (l[3] * 10) + l[4];
 		d = (l[5] * 1000) + (l[6] * 100) + (l[7] * 10) + l[8];
 		
-		if(a * b == d || l[0] * c == d) {
-			//Look if the product has been added before
-			it = find(r.begin(), r.end(), d);
-			if(it == r.end())
-				r.push_back(d);
-		}
+		if(a * b == d || l[0] * c == d)
+			r.insert(d);
 		
 	} while(next_permutation(l.begin(), l.end()));
 	
@@ -44,7 +44,7 @@ int sumProductPandigital(vector<int> s) {
 }
 
 int main() {
-	cout << "result = " << sumProductPandigital({1, 9}) << endl;
+	cout << "result = " << sumProductPandigital(1, 9) << endl;
 	
 	return 0;
 }
