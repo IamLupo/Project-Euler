@@ -1,6 +1,13 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
+#include <math.h>
+#include <numeric>
+#include <fstream>
+#include <string.h>
+#include <stdlib.h>
+
+#include "IamLupo/prime.h"
 
 using namespace std;
 
@@ -9,58 +16,29 @@ using namespace std;
 	that produces the maximum number of primes for consecutive values of n.
 */
 
-static vector<int> primes;
+static IamLupo::Primes primes;
 
-bool isPrime(int v) {
-	vector<int>::iterator it;
-	
-	it = find(primes.begin(), primes.end(), v);
-	if(it != primes.end())
-		return true;
-	
-	return false;
-}
-
-void genPrime(int m) {
-	int i, j;
-	vector<int> a, b;
-	
-	for(i = 2; i <= m * m; i++)
-		a.push_back(i);
-	
-	for(i = 2; i <= m; i++) {
-		for(j = 0; j < a.size(); j++) {
-			if(a[j] % i != 0 || a[j] <= i)
-				b.push_back(a[j]);
-		}
-		a = b;
-		b.clear();
-	}
-	
-	primes = a;
-}
-
-int findQuadraticProduct() {
+int findQuadraticProduct(int a_max, int b_max) {
 	int a, b, n;
-	bool f;
+	bool f, neg;
 	vector<int> r = {0, 0, 0};
 	
-	for(a = -1000; a < 1000; a++) {
-		for(b = -1000; b < 1000; b++) {
+	for(a = 0; a < primes.size() && primes[a] < a_max; a++) {
+		for(b = 0; b < primes.size() && primes[b] < b_max; b++) {
 			f = true;
 			n = 0;
 			
 			while(f) {
 				//Check if the calculation generate a prime
-				if(!isPrime((n * n) + (a * n) + b))
+				if(!IamLupo::Prime::is(primes, (n * n) + (primes[a] * n * - 1) + primes[b]))
 					f = false;
 				
 				//Save result
 				if(n > r[0]) {
 					r.clear();
 					r.push_back(n);
-					r.push_back(a);
-					r.push_back(b);
+					r.push_back(primes[a] * - 1);
+					r.push_back(primes[b]);
 				}
 				
 				n++;
@@ -72,11 +50,9 @@ int findQuadraticProduct() {
 }
 
 int main() {
-	//Generate Array of primes between a range of 1 and 1681
-	genPrime(41);
+	primes = IamLupo::Prime::generate(41);
 	
-	//Draw Result
-	cout << "result = " << findQuadraticProduct() << endl;
+	cout << "result = " << findQuadraticProduct(1000, 1000) << endl;
 	
 	return 0;
 }
