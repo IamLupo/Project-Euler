@@ -3,6 +3,12 @@
 #include <algorithm>
 #include <math.h>
 #include <numeric>
+#include <fstream>
+#include <string.h>
+#include <stdlib.h>
+
+#include "IamLupo/prime.h"
+#include "IamLupo/number.h"
 
 using namespace std;
 
@@ -10,47 +16,7 @@ using namespace std;
 	What is the largest n-digit pandigital prime that exists?
 */
 
-static vector<int> primes;
-
-bool isPrime(int v) {
-	vector<int>::iterator it;
-	
-	it = find(primes.begin(), primes.end(), v);
-	if(it != primes.end())
-		return true;
-	
-	return false;
-}
-
-void genPrime(int m) {
-	int i, j;
-	vector<int> a, b;
-	
-	for(i = 2; i <= m * m; i++)
-		a.push_back(i);
-	
-	for(i = 2; i <= m; i++) {
-		for(j = 0; j < a.size(); j++) {
-			if(a[j] % i != 0 || a[j] <= i)
-				b.push_back(a[j]);
-		}
-		a = b;
-		b.clear();
-	}
-	
-	primes = a;
-}
-
-int toInteger(const vector<int> &v) {
-	int i, t;
-	
-	t = 0;
-	
-	for(i = 0; i < v.size(); i++)
-		t += v[i] * pow(10, i);
-	
-	return t;
-}
+static IamLupo::Primes primes;
 
 int getLargestPandigitalPrime(int s) {
 	int i, t, r;
@@ -65,10 +31,10 @@ int getLargestPandigitalPrime(int s) {
 	
 	do {
 		//get generated number
-		t = toInteger(v);
+		t = IamLupo::Number::to(v);
 		
 		//Is the number prime?
-		if(isPrime(t)) {
+		if(IamLupo::Prime::is(primes, t)) {
 			//Save the highest number
 			if(t > r)
 				r = t;
@@ -80,8 +46,7 @@ int getLargestPandigitalPrime(int s) {
 }
 
 int main() {
-	//Generate primes till 9 milion
-	genPrime(3000);
+	primes = IamLupo::Prime::generate(100);
 	
 	cout << "result = " << getLargestPandigitalPrime(7) << endl;
 	
