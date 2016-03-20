@@ -3,6 +3,9 @@
 #include <algorithm>
 #include <math.h>
 #include <numeric>
+#include <fstream>
+#include <string.h>
+#include <stdlib.h>
 
 using namespace std;
 
@@ -13,7 +16,7 @@ using namespace std;
 	d1 × d10 × d100 × d1000 × d10000 × d100000 × d1000000
 */
 
-int findnr(long long p) {
+int find(long long p) {
 	long long l, t, r, v;
 	
 	l = 1;		// Total digits
@@ -34,21 +37,18 @@ int findnr(long long p) {
 	return (v / r) % 10;
 }
 
-int productOfFractionals(vector<long long> v) {
+int productOfFractionals(int l) {
 	int i, r;
-	
-	r = findnr(v[0]);
-	
-	for(i = 1; i < v.size(); i++)
-		r *= findnr(v[i]);
+
+	r = find(1);
+	for(i = 10; i <= l; i *= 10)
+		r *= find(i);
 	
 	return r;
 }
 
 int main() {
-	vector<long long> v = {1, 10, 100, 1000, 10000, 100000, 1000000};
-	
-	cout << "result = " << productOfFractionals(v) << endl;
+	cout << "result = " << productOfFractionals(1000000) << endl;
 	
 	return 0;
 }
