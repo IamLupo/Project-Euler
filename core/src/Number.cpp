@@ -78,6 +78,18 @@ long long IamLupo::Number::sum(const std::vector<int> &v) {
 	return r;
 }
 
+long long IamLupo::Number::sum(const std::vector<long long> &v) {
+	int i;
+	long long r;
+	
+	r = 0;
+	
+	for(i = 0; i < v.size(); i++)
+		r += v[i];
+	
+	return r;
+}
+
 /*
 	It will give the next base number of a value
 

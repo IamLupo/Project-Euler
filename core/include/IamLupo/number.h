@@ -10,6 +10,7 @@ namespace IamLupo {
 		
 		long long sum(const std::string &s);
 		long long sum(const std::vector<int> &v);
+		long long sum(const std::vector<long long> &v);
 		long long nextBase(int b, int v);
 	}
 }

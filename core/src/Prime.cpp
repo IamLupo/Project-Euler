@@ -4,6 +4,7 @@
 #include "IamLupo/prime.h"
 #include "IamLupo/number.h"
 
+/*
 bool IamLupo::Prime::is(const IamLupo::Primes &p, long long v) {
 	int i;
 	std::vector<long long>::const_iterator it;
@@ -23,7 +24,22 @@ bool IamLupo::Prime::is(const IamLupo::Primes &p, long long v) {
 		return true;
 	}
 }
+*/
 
+bool IamLupo::Prime::is(const IamLupo::Primes &p, long long v) {
+	int i;
+
+	if(v == 1)
+		return false;
+	
+	for(i = 0; i < p.size() && p[i] <= sqrt(v); i++)
+		if(v % p[i] == 0)
+			return false;
+	
+	return true;
+}
+
+/*
 IamLupo::Primes IamLupo::Prime::generate(int l) {
 	int i, j;
 	IamLupo::Primes a, b;
@@ -38,6 +54,29 @@ IamLupo::Primes IamLupo::Prime::generate(int l) {
 		}
 		a = b;
 		b.clear();
+	}
+	
+	return a;
+}
+*/
+
+IamLupo::Primes IamLupo::Prime::generate(int l) {
+	int i, j;
+	IamLupo::Primes a;
+	bool f;
+	
+	//Init
+	a.push_back(2);
+	
+	for(i = 3; i <= l; i++) {
+		f = true;
+		
+		for(j = 0; j < a.size() && sqrt(i) >= a[j] && f; j++)
+			if(i % a[j] == 0)
+				f = false;
+		
+		if(f)
+			a.push_back(i);
 	}
 	
 	return a;
