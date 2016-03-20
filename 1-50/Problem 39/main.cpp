@@ -3,6 +3,10 @@
 #include <algorithm>
 #include <math.h>
 #include <numeric>
+#include <fstream>
+#include <string.h>
+#include <stdlib.h>
+#include <set>
 
 using namespace std;
 
@@ -10,56 +14,54 @@ using namespace std;
 	For which value of p ≤ 1000, is the number of solutions maximised?
 */
 
-bool isInList(vector<vector<int>> &l, int v) {
-	int i;
-	vector<int>::iterator it;
+/*
+	https://en.wikipedia.org/wiki/Special_right_triangle#Common_Pythagorean_triples
 	
-	for(i = 0; i < l.size(); i++) {
-		it = l[i].end();
-		
-		if(find(l[i].begin(), it, v) != it)
-			return true;
-	}
+    m^2 − n^2 : 2mn : m^2 + n^2
+*/
+int getMaxAnglesTriangle(int max) {
+	int i, a, b, c, m, n, t, r;
+	vector<set<int>> v;
+	bool f;
 	
-	return false;
-}
-
-int getAnglesTriangle(int p) {
-	int i, j, k;
-	vector<int> v;
-	vector<vector<int>> l;
+	//Init
+	f = true;
+	t = 0;
+	r = 0;
 	
-	for(i = 1; i < p; i++) {
-		for(j = 1; i + j < p && !isInList(l, i); j++) {
-			k = p - i - j;
-			if(k > 0 && i * i + j * j == k * k &&
-				!isInList(l, j) && !isInList(l, k)) {
-					v.clear();
-					v.push_back(i);
-					v.push_back(j);
-					v.push_back(k);
-					l.push_back(v);
+	//Make empty list
+	for(i = 0; i < max + 1; i++)
+		v.push_back({});
+	
+	for(m = 2; 2 * m * m < max; m++) {
+		for(n = 1; m > n; n++) {
+			a = (m * m) - (n * n);
+			b = 2 * m * n;
+			c = (m * m) + (n * n);
+			
+			t = a + b + c;
+			
+			i = 1;
+			while(t * i <= max) {
+				v[t * i].insert(a * i);
+				v[t * i].insert(b * i);
+				v[t * i].insert(c * i);
+				
+				i++;
 			}
 		}
 	}
 	
-	return l.size();
-}
-
-int getMaxAnglesTriangle(int p) {
-	int i, t, r, s;
-	
-	r = 0;
-	
-	for(i = 1; i <= p; i++) {
-		t = getAnglesTriangle(i);
-		if(t > r) {
-			r = t;
-			s = i;
+	//Find the most solutions
+	t = 0;
+	for(i = 1; i < v.size(); i++) {
+		if(t < v[i].size()) {
+			t = v[i].size();
+			r = i;
 		}
 	}
 	
-	return s;
+	return r;
 }
 
 int main() {
