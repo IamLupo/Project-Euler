@@ -34,7 +34,7 @@ int findQuadraticProduct(int a_max, int b_max) {
 					f = false;
 				
 				//Save result
-				if(n > r[0]) {
+				if(n > r[0] && r[2] < primes[b]) {
 					r.clear();
 					r.push_back(n);
 					r.push_back(primes[a] * - 1);
@@ -50,9 +50,9 @@ int findQuadraticProduct(int a_max, int b_max) {
 }
 
 int main() {
-	primes = IamLupo::Prime::generate(41);
+	primes = IamLupo::Prime::generate(10000);
 	
-	cout << "result = " << findQuadraticProduct(1000, 1000) << endl;
+	cout << "result = " << findQuadraticProduct(100, 1000) << endl;
 	
 	return 0;
 }

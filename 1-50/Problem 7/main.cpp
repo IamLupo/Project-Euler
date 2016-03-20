@@ -18,7 +18,7 @@ using namespace std;
 static IamLupo::Primes primes;
 
 int main() {
-	primes = IamLupo::Prime::generate(400);
+	primes = IamLupo::Prime::generate(200000);
 	
 	cout << "result = " << primes[10000] << endl;
 	

@@ -4,6 +4,10 @@
 #include <math.h>
 #include <numeric>
 #include <fstream>
+#include <string.h>
+#include <stdlib.h>
+
+#include "IamLupo/prime.h"
 
 using namespace std;
 
@@ -12,36 +16,7 @@ using namespace std;
 	What is the first of these numbers?
 */
 
-static vector<int> primes;
-
-bool isPrime(int v) {
-	vector<int>::iterator it;
-	
-	it = find(primes.begin(), primes.end(), v);
-	if(it != primes.end())
-		return true;
-	
-	return false;
-}
-
-void genPrime(int m) {
-	int i, j;
-	vector<int> a, b;
-	
-	for(i = 2; i <= m * m; i++)
-		a.push_back(i);
-	
-	for(i = 2; i <= m; i++) {
-		for(j = 0; j < a.size(); j++) {
-			if(a[j] % i != 0 || a[j] <= i)
-				b.push_back(a[j]);
-		}
-		a = b;
-		b.clear();
-	}
-	
-	primes = a;
-}
+static IamLupo::Primes primes;
 
 bool checkMultiplier(int v, int s, int l, int m) {
 	int i, j, t;
@@ -88,7 +63,7 @@ int findConsecutiveIntegers(int l) {
 }
 
 int main() {
-	genPrime(1000);
+	primes = IamLupo::Prime::generate(140000);
 
 	cout << "result = " << findConsecutiveIntegers(4) << endl;
 	

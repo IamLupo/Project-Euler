@@ -71,7 +71,7 @@ int smallestOfRange(int min, int max) {
 }
 
 int main() {
-	primes = IamLupo::Prime::generate(10);
+	primes = IamLupo::Prime::generate(100);
 	
 	//232792560 = 2 * 3 * 2 * 5 * 7 * 2 * 3 * 11 * 13 * 17 * 19 * 2
 	cout << "result = " << smallestOfRange(1, 20) << endl;

@@ -28,7 +28,7 @@ int findLargestPrimeFactor(long long v) {
 }
 
 int main() {
-	primes = IamLupo::Prime::generate(83);
+	primes = IamLupo::Prime::generate(10000);
 	
 	cout << "result = " << findLargestPrimeFactor(600851475143) << endl;
 	

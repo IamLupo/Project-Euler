@@ -3,6 +3,9 @@
 #include <algorithm>
 #include <math.h>
 #include <numeric>
+#include <fstream>
+#include <string.h>
+#include <stdlib.h>
 
 #include "IamLupo/prime.h"
 
@@ -81,7 +84,7 @@ int firstDivider(int s) {
 }
 
 int main() {
-	primes = IamLupo::Prime::generate(100);
+	primes = IamLupo::Prime::generate(10000);
 	
 	cout << "result = " << firstDivider2(500) << endl;
 

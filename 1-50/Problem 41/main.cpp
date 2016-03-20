@@ -46,7 +46,7 @@ int getLargestPandigitalPrime(int s) {
 }
 
 int main() {
-	primes = IamLupo::Prime::generate(100);
+	primes = IamLupo::Prime::generate(3163); // 3163 * 3163 =+- 10.000.000
 	
 	cout << "result = " << getLargestPandigitalPrime(7) << endl;
 	
