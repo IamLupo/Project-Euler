@@ -59,7 +59,7 @@ IamLupo::String::explode(std::string const & s, char delim) {
 }
 
 
-std::string IamLupo::String::binairy(int v) {
+std::string IamLupo::String::binairy(long long v) {
 	std::string s;
 	
 	if(v == 0)

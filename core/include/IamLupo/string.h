@@ -11,6 +11,6 @@ namespace IamLupo {
 		
 		std::vector<std::string> explode(const std::string &s, char delim);
 		
-		std::string binairy(int v);
+		std::string binairy(long long v);
 	}
 }
