@@ -53,7 +53,7 @@ long long calcScore(const string &f) {
 }
 
 int main() {
-	cout << calcScore("names.txt") << endl;
+	cout << "result = " << calcScore("names.txt") << endl;
 
 	return 0;
 }
