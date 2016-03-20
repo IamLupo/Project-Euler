@@ -1,5 +1,9 @@
 #include "IamLupo/string.h"
 
+bool IamLupo::String::isPalindrome(long long n) {
+	return IamLupo::String::isPalindrome(std::to_string(n));
+}
+
 bool IamLupo::String::isPalindrome(const std::string &s) {
 	int i, l;
 	
@@ -52,4 +56,19 @@ IamLupo::String::explode(std::string const & s, char delim) {
 		result.push_back(std::move(token));
 
 	return result;
+}
+
+
+std::string IamLupo::String::binairy(int v) {
+	std::string s;
+	
+	if(v == 0)
+		s.push_back('0');
+	
+	while(v > 0) {
+		s.push_back((v % 2 == 0) ? '0' : '1');
+		v /= 2;
+	}
+	
+	return s;
 }
