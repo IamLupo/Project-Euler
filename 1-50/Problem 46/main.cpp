@@ -4,6 +4,10 @@
 #include <math.h>
 #include <numeric>
 #include <fstream>
+#include <string.h>
+#include <stdlib.h>
+
+#include "IamLupo/prime.h"
 
 using namespace std;
 
@@ -12,53 +16,24 @@ using namespace std;
 	prime and twice a square?
 */
 
-static vector<int> primes;
-
-bool isPrime(int v) {
-	vector<int>::iterator it;
-	
-	it = find(primes.begin(), primes.end(), v);
-	if(it != primes.end())
-		return true;
-	
-	return false;
-}
-
-void genPrime(int m) {
-	int i, j;
-	vector<int> a, b;
-	
-	for(i = 2; i <= m * m; i++)
-		a.push_back(i);
-	
-	for(i = 2; i <= m; i++) {
-		for(j = 0; j < a.size(); j++) {
-			if(a[j] % i != 0 || a[j] <= i)
-				b.push_back(a[j]);
-		}
-		a = b;
-		b.clear();
-	}
-	
-	primes = a;
-}
+static IamLupo::Primes primes;
 
 int smallestOddComposite() {
 	int i, j, t;
 	bool f;
 	
-	for(i = 3; i < primes.size(); i += 2) {
-		if(!isPrime(i)) {
+	for(i = 5; i < 10000; i += 2) {
+		if(!IamLupo::Prime::is(primes, i)) {
 			f = false;
 			t = 1;
 			
-			if(isPrime(i - 2))
+			if(IamLupo::Prime::is(primes, i - 2))
 				f = true;
 			
-			for(j = 0; t > 0 && !f; j++) {
-				t = i - ((j * j) * 2);
+			for(j = 0; i > t && !f; j++) {
+				t = pow(j, 2) * 2;
 				
-				if(isPrime(t))
+				if(i > t && IamLupo::Prime::is(primes, i - t))
 					f = true;
 			}
 			
@@ -67,11 +42,11 @@ int smallestOddComposite() {
 		}
 	}
 	
-	return -1;
+	return -1; // No result found
 }
 
 int main() {
-	genPrime(250);
+	primes = IamLupo::Prime::generate(6000);
 	
 	cout << "result = " << smallestOddComposite() << endl;
 	
