@@ -5,6 +5,7 @@
 #include <numeric>
 #include <fstream>
 #include <string.h>
+#include <stdlib.h>
 
 #include "gmp.h"
 #include "IamLupo/number.h"
@@ -17,12 +18,11 @@ using namespace std;
 */
 
 int countMaxDigits(int l) {
-	int i, j, c, h;
+	int i, j, c, r;
 	mpz_t a, b;
-	char buffer[10000];
 	
 	//Init
-	h = 0;
+	r = 0;
 	mpz_init(a);
 	mpz_init(b);
 	
@@ -30,22 +30,19 @@ int countMaxDigits(int l) {
 	for(i = 1; i < l; i++) {
 		mpz_set_ui(a, i);
 		for(j = 1; j < l; j++) {
-			// a^b
+			// b = a^j
 			mpz_pow_ui(b, a, j);
 			
-			//Get result
-			mpz_get_str(buffer, 10, b);
-			
 			//Calc the sum of digits
-			c = IamLupo::Number::sum(buffer);
+			c = IamLupo::Number::sum(mpz_get_str(nullptr, 10, b));
 			
 			//if a higher value is found save it
-			if(h < c)
-				h = c;
+			if(r < c)
+				r = c;
 		}
 	}
 	
-	return h;
+	return r;
 }
 
 int main() {
