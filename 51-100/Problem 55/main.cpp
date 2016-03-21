@@ -5,6 +5,7 @@
 #include <numeric>
 #include <fstream>
 #include <string.h>
+#include <stdlib.h>
 
 #include "gmp.h"
 #include "IamLupo/string.h"
@@ -16,14 +17,12 @@ using namespace std;
 */
 
 int countLychrelNumbers(int l, int it) {
-	int i, j, c;
+	int i, j;
 	string s;
 	vector<string> v, t;
 	mpz_t a, b;
-	char buffer[10000];
 	
 	//Init
-	c = 0;
 	mpz_init(a);
 	mpz_init(b);
 	
@@ -46,8 +45,7 @@ int countLychrelNumbers(int l, int it) {
 			mpz_add(a, a, b);
 			
 			//Save result
-			mpz_get_str(buffer, 10, a);
-			v[j] = buffer;
+			v[j] = mpz_get_str(nullptr, 10, a);;
 			
 			//Check if Palindrome
 			if(!IamLupo::String::isPalindrome(v[j]))
