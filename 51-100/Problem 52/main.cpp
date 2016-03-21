@@ -5,6 +5,7 @@
 #include <numeric>
 #include <fstream>
 #include <string.h>
+#include <stdlib.h>
 
 #include "IamLupo/vector.h"
 
@@ -28,7 +29,7 @@ int findSmallest(int l) {
 		
 		sort(v.begin(), v.end());
 		
-		for(j = 2; j <= l; j++) {
+		for(j = 2; j <= l && f; j++) {
 			t = IamLupo::Vector::to(j * i);
 			sort(t.begin(), t.end());
 			
