@@ -32,7 +32,7 @@ IamLupo::Pentagonals IamLupo::Pentagonal::generate(int l) {
 	x = 1;
 	
 	while(v <= l) {
-		r.insert(v);
+		r.push_back(v);
 		x += 3;
 		v += x;
 	}

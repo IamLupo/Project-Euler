@@ -1,7 +1,7 @@
-#include <set>
+#include <vector>
 
 namespace IamLupo {
-	typedef std::set<long long> Pentagonals;
+	typedef std::vector<long long> Pentagonals;
 	
 	namespace Pentagonal {
 		bool is(long long n);

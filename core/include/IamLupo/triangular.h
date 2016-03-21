@@ -1,7 +1,7 @@
-#include <set>
+#include <vector>
 
 namespace IamLupo {
-	typedef std::set<long long> Triangulars;
+	typedef std::vector<long long> Triangulars;
 	
 	namespace Triangular {
 		bool is(long long n);
