@@ -5,6 +5,7 @@
 #include <numeric>
 #include <fstream>
 #include <string.h>
+#include <stdlib.h>
 
 #include "gmp.h"
 #include "IamLupo/string.h"
@@ -18,7 +19,6 @@ using namespace std;
 vector<int> readFile(string &f) {
 	int i;
 	string v;
-	vector<string> t;
 	vector<int> r;
 	string::size_type sz;
 	
@@ -26,17 +26,11 @@ vector<int> readFile(string &f) {
 	
 	if(file.is_open()) {
 		while(file.good()) {
-			getline(file, v);
+			getline(file, v, ',');
 			
-			if(v.size() > 1) {
-				t = IamLupo::String::explode(v, ',');
-			}
+			r.push_back(stoi(v, &sz));
 		}
 	}
-	
-	// Convert string number to integer
-	for(i = 0; i < t.size(); i++)
-		r.push_back(stoi(t[i], &sz));
 	
 	file.close();
 	
@@ -151,10 +145,10 @@ int sumDecryptedText(string f, int l) {
 	//Look for possible keys
 	for(i = 0; i < l; i++)
 		k.push_back(findOptions(v, i, l));
-
+	
 	//Store all possible decrypted text
 	o = decrypt(v, k);
-		
+	
 	//Find the text that looks the most english
 	h = -1;
 	for(i = 0; i < o.size(); i++) {
