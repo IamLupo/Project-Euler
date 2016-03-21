@@ -1,4 +1,11 @@
 #include <iostream>
+#include <vector>
+#include <algorithm>
+#include <math.h>
+#include <numeric>
+#include <fstream>
+#include <string.h>
+#include <stdlib.h>
 
 #include "IamLupo/prime.h"
 
@@ -15,9 +22,9 @@ int countBiggerNumeratorDigit() {
 	int i, c, d;
 	long long v;
 	
-	v = 1;
+	//Init
+	v = 1; 
 	d = 0;
-	
 	c = 0;
 	i = 0;
 	
@@ -49,7 +56,7 @@ int countBiggerNumeratorDigit() {
 }
 
 int main() {
-	primes = IamLupo::Prime::generate(260);
+	primes = IamLupo::Prime::generate(30000);
 
 	cout << "result = " << countBiggerNumeratorDigit() << endl;
 	
