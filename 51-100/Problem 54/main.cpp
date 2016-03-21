@@ -5,8 +5,7 @@
 #include <numeric>
 #include <fstream>
 #include <string.h>
-
-#include "gmp.h"
+#include <stdlib.h>
 
 #include "IamLupo/string.h"
 
