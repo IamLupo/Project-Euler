@@ -5,6 +5,7 @@
 #include <numeric>
 #include <fstream>
 #include <string.h>
+#include <stdlib.h>
 
 #include "gmp.h"
 
@@ -23,7 +24,6 @@ using namespace std;
 bool C(int n, int r, int m) {
 	int i;
 	mpz_t a, b;
-	char buffer[10000];
 	
 	//Init
 	mpz_init_set_ui(a, 1);
@@ -44,18 +44,17 @@ bool C(int n, int r, int m) {
 }
 
 int countDistinctValues(vector<int> s, int m) {
-	int i, j, v, c;
+	int i, j, v, r;
 	
-	c = 0;
+	//Init
+	r = 0;
 
-	for(i = s[1]; i >= s[0]; i--) {
-		for(j = i; j >= s[0]; j--) {
+	for(i = s[1]; i >= s[0]; i--)
+		for(j = i; j >= s[0]; j--)
 			if(C(i, j, m))
-				c++;
-		}
-	}
+				r++;
 	
-	return c;
+	return r;
 }
 
 int main() {
