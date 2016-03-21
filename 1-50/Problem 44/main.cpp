@@ -37,7 +37,7 @@ bool isPentagonal(int v) {
 
 int getDifferencePentagonal() {
 	long long v;
-	set<long long>::iterator x, y;
+	vector<long long>::iterator x, y;
 	
 	for(x = pentagonals.begin(); x != pentagonals.end(); x++) {
 		for(y = pentagonals.begin(); y != x; y++) {
