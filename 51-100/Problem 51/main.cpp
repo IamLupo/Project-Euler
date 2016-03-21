@@ -22,11 +22,7 @@ static IamLupo::Primes primes;
 
 vector<int> findRepetition(vector<int> &v) {
 	int i, j;
-	vector<int> t, r;
-	
-	//Init
-	for(i = 0; i < 10; i++)
-		t.push_back(0);
+	vector<int> t(10, 0), r;
 	
 	//Count values
 	for(i = 0; i < v.size(); i++)
@@ -49,6 +45,7 @@ int findSmallestFamily(int target, int l) {
 	vector<int> t, t2, v;
 	
 	for(i = 0; i < primes.size(); i++) {
+		// Split digits
 		t = IamLupo::Vector::to(primes[i]);
 		reverse(t.begin(), t.end());
 		v = findRepetition(t);
@@ -83,7 +80,7 @@ int findSmallestFamily(int target, int l) {
 }
 
 int main() {
-	primes = IamLupo::Prime::generate(1000);
+	primes = IamLupo::Prime::generate(1000000);
 
 	cout << "result = " << findSmallestFamily(8, 6) << endl;
 	
