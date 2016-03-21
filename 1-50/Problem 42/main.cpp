@@ -4,6 +4,8 @@
 #include <math.h>
 #include <numeric>
 #include <fstream>
+#include <string.h>
+#include <stdlib.h>
 
 using namespace std;
 
@@ -11,18 +13,31 @@ using namespace std;
 	What is the largest n-digit pandigital prime that exists?
 */
 
-const vector<string> explode(const string& s, const char& c) {
-	string buff{""};
-	vector<string> v;
+vector<int> readFile(const string &f) {
+	int i, v;
+	string s;
+	vector<int> r;
 	
-	for(auto n:s)
-	{
-		if(n != c) buff+=n; else
-		if(n == c && buff != "") { v.push_back(buff); buff = ""; }
+	ifstream file(f);
+	
+	if(file.is_open()) {
+		while(file.good()) {
+			getline(file, s, ',');
+			
+			//Convert
+			v = 0;
+			for(i = 0; i < s.size(); i++)
+				if(s[i] != '"')
+					v += (int)s[i] - 64;
+			
+			//Save result
+			r.push_back(v);
+		}
 	}
-	if(buff != "") v.push_back(buff);
 	
-	return v;
+	file.close();
+	
+	return r;
 }
 
 bool isTriangle(int v) {
@@ -42,28 +57,16 @@ bool isTriangle(int v) {
 	return false;
 }
 
-int getWordNumber(string v) {
+int countTriangleWords(const string &f) {
 	int i, r;
+	vector<int> v;
 	
+	//Init
 	r = 0;
+	v = readFile(f);
 	
 	for(i = 0; i < v.size(); i++)
-		if(v[i] != '"')
-			r += (int)v[i] - 64;
-	
-	return r;
-}
-
-int countTriangleWords(string s) {
-	int i, r;
-	ifstream input(s);
-	string line;
-	
-	getline(input, line);
-	vector<string> v{explode(line, ',')};
-	
-	for(i = 0; i < v.size(); i++)
-		if(isTriangle(getWordNumber(v[i])))
+		if(isTriangle(v[i]))
 			r++;
 	
 	return r;
