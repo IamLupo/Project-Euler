@@ -1,0 +1,10 @@
+#!/bin/bash
+
+for i in {1..50}
+do
+	echo "Problem $i:"
+	cd Problem\ $i/
+	time ./main
+	cd ..
+	echo "---------------------"
+done

@@ -1,0 +1,10 @@
+#!/bin/bash
+
+for i in {1..50}
+do
+	echo "compile: Problem $i:"
+	cd Problem\ $i/
+	./compile
+	cd ..
+	echo "---------------------"
+done
