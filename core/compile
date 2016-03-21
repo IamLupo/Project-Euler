@@ -1,15 +1,15 @@
-g++ -c src/Sqrt.cpp -o tmp/Sqrt.o -I "./include" --std=c++11 -lm
-g++ -c src/String.cpp -o tmp/String.o -I "./include" --std=c++11
-g++ -c src/Prime.cpp -o tmp/Prime.o -I "./include" --std=c++11
-g++ -c src/Number.cpp -o tmp/Number.o -I "./include" --std=c++11
-g++ -c src/Vector.cpp -o tmp/Vector.o -I "./include" --std=c++11
-g++ -c src/Math.cpp -o tmp/Math.o -I "./include" --std=c++11
-g++ -c src/Permutation.cpp -o tmp/Permutation.o -I "./include" --std=c++11
-g++ -c src/Pentagonal.cpp -o tmp/Pentagonal.o -I "./include" --std=c++11
+g++ -c src/Sqrt.cpp -o tmp/Sqrt.o -I "./include" --std=c++11 -lm -O2
+g++ -c src/String.cpp -o tmp/String.o -I "./include" --std=c++11 -O2
+g++ -c src/Prime.cpp -o tmp/Prime.o -I "./include" --std=c++11 -O2
+g++ -c src/Number.cpp -o tmp/Number.o -I "./include" --std=c++11 -O2
+g++ -c src/Vector.cpp -o tmp/Vector.o -I "./include" --std=c++11 -O2
+g++ -c src/Math.cpp -o tmp/Math.o -I "./include" --std=c++11 -O2
+g++ -c src/Permutation.cpp -o tmp/Permutation.o -I "./include" --std=c++11 -O2
+g++ -c src/Pentagonal.cpp -o tmp/Pentagonal.o -I "./include" --std=c++11 -O2
 g++ -c src/Triangular.cpp -o tmp/Triangular.o -I "./include" --std=c++11
-g++ -c src/Roman.cpp -o tmp/Roman.o -I "./include" --std=c++11
-g++ -c src/Divider.cpp -o tmp/Divider.o -I "./include" --std=c++11
-g++ -c src/Fibonacci.cpp -o tmp/Fibonacci.o -I "./include" --std=c++11
+g++ -c src/Roman.cpp -o tmp/Roman.o -I "./include" --std=c++11 -O2
+g++ -c src/Divider.cpp -o tmp/Divider.o -I "./include" --std=c++11 -O2
+g++ -c src/Fibonacci.cpp -o tmp/Fibonacci.o -I "./include" --std=c++11 -O2
 
 
 ar rcs lib/libiamlupo.a tmp/Sqrt.o tmp/String.o tmp/Prime.o tmp/Number.o tmp/Vector.o tmp/Math.o tmp/Permutation.o tmp/Pentagonal.o tmp/Triangular.o tmp/Roman.o tmp/Divider.o tmp/Fibonacci.o
