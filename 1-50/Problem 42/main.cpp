@@ -7,6 +7,8 @@
 #include <string.h>
 #include <stdlib.h>
 
+#include "IamLupo/triangular.h"
+
 using namespace std;
 
 /*
@@ -40,23 +42,6 @@ vector<int> readFile(const string &f) {
 	return r;
 }
 
-bool isTriangle(int v) {
-	int t, x;
-	
-	x = 1;
-	t = 1;
-	
-	while(t < v) {
-		x += 1;
-		t += x;
-	}
-	
-	if(t == v)
-		return true;
-	
-	return false;
-}
-
 int countTriangleWords(const string &f) {
 	int i, r;
 	vector<int> v;
@@ -66,7 +51,7 @@ int countTriangleWords(const string &f) {
 	v = readFile(f);
 	
 	for(i = 0; i < v.size(); i++)
-		if(isTriangle(v[i]))
+		if(IamLupo::Triangular::is(v[i]))
 			r++;
 	
 	return r;
