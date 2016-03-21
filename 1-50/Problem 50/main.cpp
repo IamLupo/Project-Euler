@@ -5,6 +5,9 @@
 #include <numeric>
 #include <fstream>
 #include <string.h>
+#include <stdlib.h>
+
+#include "IamLupo/prime.h"
 
 using namespace std;
 
@@ -13,36 +16,7 @@ using namespace std;
 	of the most consecutive primes?
 */
 
-static vector<int> primes;
-
-bool isPrime(int v) {
-	vector<int>::iterator it;
-	
-	it = find(primes.begin(), primes.end(), v);
-	if(it != primes.end())
-		return true;
-	
-	return false;
-}
-
-void genPrime(int m) {
-	int i, j;
-	vector<int> a, b;
-	
-	for(i = 2; i <= m * m; i++)
-		a.push_back(i);
-	
-	for(i = 2; i <= m; i++) {
-		for(j = 0; j < a.size(); j++) {
-			if(a[j] % i != 0 || a[j] <= i)
-				b.push_back(a[j]);
-		}
-		a = b;
-		b.clear();
-	}
-	
-	primes = a;
-}
+static IamLupo::Primes primes;
 
 int findMostConsecutivePrimes(int m) {
 	int i, v, l, r, p;
@@ -67,7 +41,7 @@ int findMostConsecutivePrimes(int m) {
 			i++;
 		}
 		
-		if(isPrime(v)) {
+		if(IamLupo::Prime::is(primes, v)) {
 			l = i - p;
 			r = v;
 		}
@@ -77,7 +51,7 @@ int findMostConsecutivePrimes(int m) {
 }
 
 int main() {
-	genPrime(1000);
+	primes = IamLupo::Prime::generate(1000000);
 
 	cout << "result = " << findMostConsecutivePrimes(1000000) << endl;
 	
