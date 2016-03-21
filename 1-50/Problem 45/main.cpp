@@ -4,6 +4,8 @@
 #include <math.h>
 #include <numeric>
 #include <fstream>
+#include <string.h>
+#include <stdlib.h>
 
 using namespace std;
 
@@ -12,48 +14,45 @@ using namespace std;
 	Find the next triangle number that is also pentagonal and hexagonal.
 */
 
-long long H(int v) {
+long long H(long long v) {
 	return ((v * 2) - 1) * v;
 }
 
-void nextTriangle(vector<long long> &v) {
+long long next(const vector<long long> &v) {
 	long long a, b, c;
-
-	v[0]++;
+	vector<long long> r;
+	
+	//Init
+	r = v;
+	
+	//Next
+	r[0]++;
 	
 	while(1) {
-		a = (v[0] + 1) * v[0];
-		b = ((v[1] * 3) - 1) * v[1];
+		a = (r[0] + 1) * r[0];				// Triangle
+		b = ((r[1] * 3) - 1) * r[1];		// Pentagonal
 		
 		if(a < b)
-			v[0]++;
+			r[0]++;
 		else if(a > b)
-			v[1]++;
+			r[1]++;
 		else {
-			c = ((v[2] * 4) - 2) * v[2];
+			c = ((r[2] * 4) - 2) * r[2];	// Hexagonal
 			
 			if(c < a)
-				v[2]++;
+				r[2]++;
 			else if(c > a)
-				v[0]++;
+				r[0]++;
 			else
 				break;
 		}
 	}
+	
+	return H(r[2]);
 }
 
 int main() {
-	vector<long long> v = {1, 1, 1};
-	
-	nextTriangle(v); // Result: {285, 143, 143}
-	nextTriangle(v); // Result: {55385, 31977, 27693}
-	
-	cout << "result = {"
-		<< v[0] << ", "
-		<< v[1] << ", "
-		<< v[2] << "} = "
-		<< H(v[2])
-		<< endl;
+	cout << "result = " << next({285, 143, 143}) << endl;
 	
 	return 0;
 }
