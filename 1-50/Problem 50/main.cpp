@@ -51,7 +51,7 @@ int findMostConsecutivePrimes(int m) {
 }
 
 int main() {
-	primes = IamLupo::Prime::generate(1000000);
+	primes = IamLupo::Prime::readFile(1000000);
 
 	cout << "result = " << findMostConsecutivePrimes(1000000) << endl;
 	

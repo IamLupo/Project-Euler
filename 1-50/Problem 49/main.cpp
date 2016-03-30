@@ -88,7 +88,7 @@ long long findArithmeticSequence() {
 }
 
 int main() {
-	primes = IamLupo::Prime::generate(10000);
+	primes = IamLupo::Prime::readFile(10000);
 	
 	cout << "result = " << findArithmeticSequence() << endl;
 	

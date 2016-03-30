@@ -63,7 +63,7 @@ int findConsecutiveIntegers(int l) {
 }
 
 int main() {
-	primes = IamLupo::Prime::generate(140000);
+	primes = IamLupo::Prime::readFile(140000);
 
 	cout << "result = " << findConsecutiveIntegers(4) << endl;
 	

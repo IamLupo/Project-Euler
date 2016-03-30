@@ -84,7 +84,7 @@ int firstDivider(int s) {
 }
 
 int main() {
-	primes = IamLupo::Prime::generate(10000);
+	primes = IamLupo::Prime::readFile(10000);
 	
 	cout << "result = " << firstDivider2(500) << endl;
 
