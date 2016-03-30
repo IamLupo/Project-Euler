@@ -5,6 +5,7 @@
 #include <numeric>
 #include <fstream>
 #include <string.h>
+#include <stdlib.h>
 
 #include "gmp.h"
 
@@ -15,30 +16,30 @@ using namespace std;
 	permutations of its digits are cube.
 */
 
-int countOptions(const string &v) {
+int countOptions(const string &s) {
 	int i, c;
-	mpz_t t, l1, l2;
+	mpz_t t, min, max;
 	string r;
 	
 	//Init
 	mpz_init_set_ui(t, 0);
-	mpz_init(l1);
-	mpz_init(l2);
+	mpz_init(min);
+	mpz_init(max);
 	c = 0;
 	
 	//Calculate Limits
-	mpz_ui_pow_ui(l1, 10, v.size());
-	mpz_ui_pow_ui(l2, 10, v.size() - 1);
+	mpz_ui_pow_ui(min, 10, s.size() - 1);
+	mpz_ui_pow_ui(max, 10, s.size());
 	
-	for(i = 2; mpz_cmp(t, l1) < 0; i++) {
+	for(i = 2; mpz_cmp(t, max) < 0; i++) {
 		mpz_ui_pow_ui(t, i, 3);
 		
-		if(mpz_cmp(t, l2) >= 0) {
+		if(mpz_cmp(t, min) >= 0) {
 			// Convert and Sort
 			r = mpz_get_str(NULL, 10, t);
 			sort(r.begin(), r.end());
 			
-			if(v.compare(r) == 0)
+			if(s.compare(r) == 0)
 				c++;
 		}
 	}
