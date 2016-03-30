@@ -7,8 +7,6 @@
 #include <string.h>
 #include <stdlib.h>
 
-#include "gmp.h"
-
 #include "IamLupo/prime.h"
 #include "IamLupo/number.h"
 
