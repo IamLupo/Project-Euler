@@ -1,5 +1,10 @@
 #include <iostream>
 #include <vector>
+#include <algorithm>
+#include <math.h>
+#include <numeric>
+#include <fstream>
+#include <string.h>
 
 #include "IamLupo/sqrt.h"
 #include "IamLupo/number.h"

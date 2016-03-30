@@ -6,7 +6,7 @@
 #include <fstream>
 #include <string.h>
 
-#include "gmp.h"
+#include "IamLupo/sqrt.h"
 
 using namespace std;
 
@@ -206,16 +206,15 @@ vector<int> fraction(int s) {
 }
 
 int countOddFractions(int l) {
-	int i, j, vl, c;
-	vector<int> v;
+	int i, c;
+	IamLupo::Sqrt::CFraction fr;
 	
 	c = 0;
 	
 	for(i = 1; i <= l; i++) {
-		v = fraction(i);
-		vl = v.size() - 1;
+		fr = IamLupo::Sqrt::ContinuedFraction(i);
 		
-		if(vl % 2 == 1)
+		if(fr.size() % 2 == 0)
 			c++;
 	}
 	

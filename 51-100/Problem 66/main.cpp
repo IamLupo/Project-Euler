@@ -1,5 +1,10 @@
 #include <iostream>
 #include <vector>
+#include <algorithm>
+#include <math.h>
+#include <numeric>
+#include <fstream>
+#include <string.h>
 
 #include "IamLupo/sqrt.h"
 
@@ -27,6 +32,8 @@ long long findLargest(int l) {
 			f = false;
 			
 			while(!f) {
+				//t = x^2
+				//v = d * y^2
 				//x^2 - (d * y^2)
 				mpz_mul(t, exp.x2, exp.x2);
 				mpz_mul(v, exp.y2, exp.y2);
