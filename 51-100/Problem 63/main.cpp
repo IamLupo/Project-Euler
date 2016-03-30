@@ -5,6 +5,7 @@
 #include <numeric>
 #include <fstream>
 #include <string.h>
+#include <stdlib.h>
 
 #include "gmp.h"
 
