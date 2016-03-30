@@ -5,8 +5,9 @@
 #include <numeric>
 #include <fstream>
 #include <string.h>
+#include <stdlib.h>
 
-#include "gmp.h"
+#include "IamLupo/number.h"
 
 using namespace std;
 
@@ -51,9 +52,8 @@ int p(int i, int v) {
 }
 
 void bruteforce(vector<int> &x, vector<int> &y, int* h, int n, int l, int m) {
-	int i, j, v, t, s;
+	int i, j, v;
 	vector<int> x2, y2;
-	vector<int>::iterator it;
 	
 	// level is max
 	if(l == m) {
@@ -64,40 +64,28 @@ void bruteforce(vector<int> &x, vector<int> &y, int* h, int n, int l, int m) {
 				f(9918, 1815) = true, because 18
 				f(5678, 7700) = false, because 78 != 77
 		*/
-		if(x[0] % 100 == x[m - 1] / 100) {
-			s = 0;
-			
-			//Sum values
-			for(i = 0; i < x.size(); i++)
-				s += x[i];
-
-			//Save sum
-			*h = s;
-		}
+		if(x[0] % 100 == x[m - 1] / 100)
+			*h = IamLupo::Number::sum(x);
 		
 		return;
 	}
 	
+	//Loop all polygonal types
 	for(j = 0; j < m; j++) {
-		//Check if index is used before
-		it = find(y.begin(), y.end(), j);
-		
-		if(it == y.end()) {
-			v = 0;
-			
-			//function
+		//Check if polygonal types is used before
+		if(find(y.begin(), y.end(), j) == y.end()) {
+			//Save polygonal type
 			y2 = y;
 			y2.push_back(j);
 			
-			for(i = 0; v < 10000; i++) {
+			//Loop all possible values in polygonal type
+			for(i = 0, v = 0; v < 10000; i++) {
 				v = p(j, i);
 				
-				//Check if index is used before
-				it = find(x.begin(), x.end(), v);
-				
-				if(it == x.end() && v >= 1000 && v < 10000) {
-					if(v % 100 == n || l == 0) {
-						//index
+				if(v % 100 == n || l == 0) {
+					//Check if index is in range or if is used before
+					if(v >= 1000 && v < 10000 && find(x.begin(), x.end(), v) == x.end()) {
+						//Save polygonal value
 						x2 = x;
 						x2.push_back(v);
 						
@@ -114,8 +102,6 @@ int sumOrderedCyclicNumbers(int m) {
 	vector<int> x, y;
 	
 	//Init
-	x = {};
-	y = {};
 	h = 0;
 	
 	//Rock and roll! :D
