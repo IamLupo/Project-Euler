@@ -12,8 +12,7 @@
 using namespace std;
 
 /*
-	Find the smallest cube for which exactly five
-	permutations of its digits are cube.
+	Find the smallest cube for which exactly five permutations of its digits are cube.
 */
 
 int countOptions(const string &s) {
