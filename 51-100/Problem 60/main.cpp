@@ -5,6 +5,7 @@
 #include <numeric>
 #include <fstream>
 #include <string.h>
+#include <stdlib.h>
 
 #include "gmp.h"
 
@@ -20,14 +21,14 @@ using namespace std;
 
 static IamLupo::Primes primes;
 
-void brutforce(vector<int> &r, int* m, int index, int max) {
+bool brutforce(vector<int> &r, int* m, int index, int max) {
 	int s;
 	vector<int> t;
 	
 	if(r.size() == max) {
 		//Calculate the new max value
 		*m = IamLupo::Number::sum(r);
-		return;
+		return true;
 	}
 	
 	//Calculate the sum of the valide values
@@ -52,11 +53,14 @@ void brutforce(vector<int> &r, int* m, int index, int max) {
 			t.push_back(primes[index]);
 			
 			//Start a new generation
-			brutforce(t, m, index + 1, max);
+			if(brutforce(t, m, index + 1, max))
+				return true;
 		}
 		
 		index++;
 	}
+	
+	return false;
 }
 
 int sumConcatenatePrimes(int l) {
@@ -71,7 +75,7 @@ int sumConcatenatePrimes(int l) {
 }
 
 int main() {
-	primes = IamLupo::Prime::generate(100);
+	primes = IamLupo::Prime::readFile(10000);
 	
 	cout << "result = " << sumConcatenatePrimes(5) << endl;
 	
