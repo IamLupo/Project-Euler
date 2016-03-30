@@ -83,6 +83,9 @@ IamLupo::Primes IamLupo::Prime::generate(int l) {
 }
 
 /*
+	Wiki:
+		https://en.wikipedia.org/wiki/Concatenation_%28mathematics%29
+	
 	Example:
 		f({3}, 5) = false, because 35 isnt prime
 		f({3, 7}, 13) = false, because 133 and 713 isnt a prime
