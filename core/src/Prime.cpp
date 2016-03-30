@@ -1,5 +1,7 @@
 #include <algorithm>
 #include <math.h>
+#include <fstream>
+#include <string>
 
 #include "IamLupo/prime.h"
 #include "IamLupo/number.h"
@@ -80,6 +82,38 @@ IamLupo::Primes IamLupo::Prime::generate(int l) {
 	}
 	
 	return a;
+}
+
+IamLupo::Primes IamLupo::Prime::readFile(int l) {
+	int i;
+	long long t;
+	std::string v;
+	IamLupo::Primes r;
+	
+	for(i = 1; i <= 10; i++) {
+		std::ifstream file("../../data/prime/primes" + std::to_string(i) + ".txt");
+		
+		if(file.is_open()) {
+			while(file.good()) {
+				getline(file, v, ' ');
+				t = IamLupo::Number::to(v);
+				
+				if(t != 0) {
+					if(t <= l)
+						r.push_back(t);
+					else {
+						file.close();
+						
+						return r;
+					}
+				}
+			}
+		}
+		
+		file.close();
+	}
+	
+	return r;
 }
 
 /*
