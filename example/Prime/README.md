@@ -1,0 +1,1 @@
+Made different ways of generating Primes and show speed differences.
