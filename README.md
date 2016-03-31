@@ -19,5 +19,6 @@ Compile IamLupo Core Library:
 	./compile
 
 Step 3:
-At this point you can compile all Problems and Examples by cd to
-the directory and type "./compile"
+At this point you can compile all Problems and Examples with:
+	
+	./compile
