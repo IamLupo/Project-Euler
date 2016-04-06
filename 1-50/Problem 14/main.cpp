@@ -21,7 +21,7 @@ int getLongestChain(int m) {
 	h = 0;
 	r = 0;
 	
-	for(i = 1; i < m; i++) {
+	for(i = (((m / 2) % 2) == 1) ? m / 2 : m / 2 + 1; i <= m; i += 2) {
 		value = i;
 		c = 0;
 		
