@@ -1,23 +1,16 @@
+#include "math.h"
+
 #include "IamLupo/pentagonal.h"
 
 /*
 	https://en.wikipedia.org/wiki/Pentagonal_number
 */
-bool IamLupo::Pentagonal::is(long long n) {
-	int i, x, t;
+bool IamLupo::Pentagonal::is(long long v) {
+	double r;
 	
-	t = 1;
-	x = 1;
+	r = (sqrt(1 + 24 * v) + 1.0) / 6.0;
 	
-	while(t < n) {
-		x += 3;
-		t += x;
-	}
-	
-	if(n == t)	
-		return true;
-	
-	return false;
+    return r == ((int)r);
 }
 
 long long IamLupo::Pentagonal::get(long long n) {

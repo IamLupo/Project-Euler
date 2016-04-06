@@ -18,23 +18,6 @@ using namespace std;
 
 static IamLupo::Pentagonals pentagonals;
 
-bool isPentagonal(int v) {
-	int i, x, t;
-	
-	t = 1;
-	x = 1;
-	
-	while(t < v) {
-		x += 3;
-		t += x;
-	}
-	
-	if(v == t)	
-		return true;
-	
-	return false;
-}
-
 int getDifferencePentagonal() {
 	long long v;
 	vector<long long>::iterator x, y;
@@ -43,7 +26,7 @@ int getDifferencePentagonal() {
 		for(y = pentagonals.begin(); y != x; y++) {
 			v = (*x - *y >= 0) ? *x - *y : (*x - *y) * -1;
 			
-			if(isPentagonal(v) && isPentagonal(*x + *y))
+			if(IamLupo::Pentagonal::is(v) && IamLupo::Pentagonal::is(*x + *y))
 				return v;
 		}
 	}
