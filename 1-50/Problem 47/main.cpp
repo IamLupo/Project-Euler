@@ -18,53 +18,57 @@ using namespace std;
 
 static IamLupo::Primes primes;
 
-bool checkMultiplier(int v, int s, int l, int m) {
-	int i, j, t;
+int PrimeFacors(int n) {
+	int i, r, t;
+	bool pf;
 	
-	if(l == m && v == 1)
-		return true;
+	//Init
+	r = 0;
+	t = n;
 	
-	for(i = s; i < primes.size() && primes[i] <= v && primes[i] <= 700; i++) {
-		for(j = 1; pow(primes[i], j) <= v; j++) {
-			t = pow(primes[i], j);
-			
-			if(v % t == 0) {
-				t = v / t;
-				
-				if(checkMultiplier(t, i + 1, l + 1, m))
-					return true;
-			}
+	for(i = 0; i < primes.size(); i++) {
+		if(primes[i] * primes[i] > n)
+			return r + 1;
+
+		pf = false;
+		
+		while (t % primes[i] == 0) {
+			pf = true;
+			t /= primes[i];
 		}
+		
+		if(pf)
+			r++;
+
+		// remainder is to low to find more prime factors
+		if(t == 1)
+			return r;
 	}
-	
-	return false;
+
+	return r;
 }
 
 int findConsecutiveIntegers(int l) {
-	int i, j, v, r, p;
-
-	for(i = 0; i < primes.size(); i++) {
-		if(primes[i + 1] - primes[i] - 1 >= l) {
-			v = 0;
-			p = primes[i] + 1;
-			for(j = p; j < primes[i + 1]; j++) {
-				if(checkMultiplier(j, 0, 0, l))
-					v++;
-				else {
-					v = 0;
-					p = j;
-				}
-				
-				if(v == l)
-					return p + 1;
-			}
-		}
+	int c, r;
+	
+	//Init
+	c = 1;				// Found consecutive integers
+	r = 2 * 3 * 5 * 7;	// Calc start point to check
+	
+	while (c < l) {
+		r++;
+		if(PrimeFacors(r) >= l)
+			c++;
+		else
+			c = 0;
 	}
+	
+	return r - l + 1;
 }
 
 int main() {
-	primes = IamLupo::Prime::generate(140000);
-
+	primes = IamLupo::Prime::generate(400);
+	
 	cout << "result = " << findConsecutiveIntegers(4) << endl;
 	
 	return 0;
