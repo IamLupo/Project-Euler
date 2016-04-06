@@ -53,12 +53,13 @@ void test_speed() {
 	test_readFile(10000000);
 	
 	cout << "primes 100000000 or lower:" << endl;
+	test_generate(100000000);
 	test_readFile(100000000);
 }
 
 void test_data() {
 	int i;
-	primes = IamLupo::Prime::readFile(100000000);
+	primes = IamLupo::Prime::generate(100000000);
 	
 	//Debug
 	cout << "First 10 primes :" << endl;

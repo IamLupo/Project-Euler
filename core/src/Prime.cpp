@@ -62,6 +62,7 @@ IamLupo::Primes IamLupo::Prime::generate(int l) {
 }
 */
 
+/*
 IamLupo::Primes IamLupo::Prime::generate(int l) {
 	int i, j;
 	IamLupo::Primes a;
@@ -80,6 +81,28 @@ IamLupo::Primes IamLupo::Prime::generate(int l) {
 		if(f)
 			a.push_back(i);
 	}
+	
+	return a;
+}
+*/
+
+IamLupo::Primes IamLupo::Prime::generate(int l) {
+	int i, j;
+	IamLupo::Primes a;
+	std::vector<bool> f(l + 1, true);
+	
+	//Init
+	a.push_back(2);
+	
+	//Filter none primes
+	for(i = 3; i <= sqrt(l); i += 2)
+		for(j = i + i; j <= l && f[i]; j += i)
+			f[j] = false;
+	
+	//Get primes
+	for(i = 3; i <= l; i += 2)
+		if(f[i])
+			a.push_back(i);
 	
 	return a;
 }

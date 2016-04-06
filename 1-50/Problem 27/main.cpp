@@ -50,7 +50,7 @@ int findQuadraticProduct(int a_max, int b_max) {
 }
 
 int main() {
-	primes = IamLupo::Prime::readFile(10000);
+	primes = IamLupo::Prime::generate(10000);
 	
 	cout << "result = " << findQuadraticProduct(100, 1000) << endl;
 	

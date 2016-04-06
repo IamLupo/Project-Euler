@@ -19,7 +19,7 @@ using namespace std;
 static IamLupo::Primes primes;
 
 int main() {
-	primes = IamLupo::Prime::readFile(2000000);
+	primes = IamLupo::Prime::generate(2000000);
 	
 	cout << "result = " << IamLupo::Number::sum(primes) << endl;
 	
