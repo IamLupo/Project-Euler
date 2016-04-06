@@ -39,8 +39,10 @@ int find(long long p) {
 
 int productOfFractionals(int l) {
 	int i, r;
-
-	r = find(1);
+	
+	//Init
+	r = 1;
+	
 	for(i = 10; i <= l; i *= 10)
 		r *= find(i);
 	
