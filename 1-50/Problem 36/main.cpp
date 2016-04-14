@@ -26,7 +26,7 @@ int sumPalindromic(int m) {
 	for(i = 1; i < m; i++) {
 		if(IamLupo::String::isPalindrome(i)) {
 			v = IamLupo::String::binairy(i);
-			if(IamLupo::String::isPalindrome(v) && v[0] == '1') {
+			if(v[0] == '1' && IamLupo::String::isPalindrome(v)) {
 				r += i;
 				
 				//Debug
