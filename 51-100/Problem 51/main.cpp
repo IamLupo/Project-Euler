@@ -81,7 +81,7 @@ int findSmallestFamily(int target, int l) {
 }
 
 int main() {
-	primes = IamLupo::Prime::readFile(1000000);
+	primes = IamLupo::Prime::generate(1000000);
 
 	cout << "result = " << findSmallestFamily(8, 6) << endl;
 	

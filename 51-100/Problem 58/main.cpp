@@ -56,7 +56,7 @@ int countBiggerNumeratorDigit() {
 }
 
 int main() {
-	primes = IamLupo::Prime::readFile(30000);
+	primes = IamLupo::Prime::generate(30000);
 
 	cout << "result = " << countBiggerNumeratorDigit() << endl;
 	
