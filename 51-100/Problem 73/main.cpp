@@ -114,6 +114,7 @@ long long A128115(long long n, vector<int> &mu, vector<int> &div) {
 }
 
 long long countProperFractions(int l) {
+	int i;
 	long long r;
 	vector<int> mu;
 	vector<vector<int>> div;
@@ -123,7 +124,7 @@ long long countProperFractions(int l) {
 	div = dividers(l);
 	mu = Mobius(l);
 	
-	for(int i = 3; i <= l; i++)
+	for(i = 3; i <= l; i++)
 		r += A128115(i, mu, div[i]);
 	
 	return r;
