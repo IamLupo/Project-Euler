@@ -32,35 +32,64 @@ long long A103221(long long n) {
 	else
 		return (n / 6) + 1;
 }
- 
+
 long long countProperFractions(int l) {
-	int i, j;
+	int i, j, v, m;
 	long long r;
 	vector<int> mu(l + 1, 0);
 	
 	//Init
 	r = 0;
-	mu[1] = 1;
 	
-	for(i = 1; i <= l; i++) {
+	//Init Mobius
+	mu[1] = 1;
+	for(i = 2; i <= l; i++)
+		mu[i] -= 1;
+	
+	for(i = 2; i <= l; i++) {
 		//Generate Mobius
 		for(j = 2 * i; j <= l; j += i)
 			mu[j] -= mu[i];
 		
 		//Calculate Mobius inverse values
-		if(i >= 2)
+		if(mu[i] != 0)
 			for(j = 2; i * j <= l; j++)
 				r += mu[i] * A103221(j);
 		
 		if(i >= 4)
-			r += mu[1] * A103221(i);
+			r += A103221(i);
 	}
-		
+	
 	return r;
 }
- 
+
 int main() {
 	cout << "result = " << countProperFractions(12000) << endl;
+	/*
+		result = 7295372
+
+		real    0m0.002s
+		user    0m0.000s
+		sys     0m0.000s
+	*/
+	
+	//cout << "result = " << countProperFractions(1000000) << endl;
+	/*
+		result = 50660592050
+
+		real    0m0.073s
+		user    0m0.072s
+		sys     0m0.000s
+	*/
+	
+	//cout << "result = " << countProperFractions(100000000) << endl;
+	/*
+		result = 506605919393028
+
+		real    0m26.397s
+		user    0m26.356s
+		sys     0m0.040s
+	*/
 	
 	return 0;
 }
