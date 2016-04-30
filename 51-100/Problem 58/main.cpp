@@ -7,7 +7,7 @@
 #include <string.h>
 #include <stdlib.h>
 
-#include "IamLupo/prime.h"
+#include "miller-rabin/miller-rabin.h"
 
 using namespace std;
 
@@ -15,8 +15,6 @@ using namespace std;
 	what is the side length of the square spiral for which the ratio of
 	primes along both diagonals first falls below 10%?
 */
-
-static IamLupo::Primes primes;
 
 int countBiggerNumeratorDigit() {
 	int i, c, d;
@@ -32,22 +30,22 @@ int countBiggerNumeratorDigit() {
 		d += 2;
 		
 		v += d;
-		if(IamLupo::Prime::is(primes, v))
+		if(isprime(v))
 			c++;
 		i++;
 		
 		v += d;
-		if(IamLupo::Prime::is(primes, v))
+		if(isprime(v))
 			c++;
 		i++;
 		
 		v += d;
-		if(IamLupo::Prime::is(primes, v))
+		if(isprime(v))
 			c++;
 		i++;
 
 		v += d;
-		if(IamLupo::Prime::is(primes, v))
+		if(isprime(v))
 			c++;
 		i++;
 	} while(i < c * 10);
@@ -56,8 +54,6 @@ int countBiggerNumeratorDigit() {
 }
 
 int main() {
-	primes = IamLupo::Prime::generate(30000);
-
 	cout << "result = " << countBiggerNumeratorDigit() << endl;
 	
 	return 0;
