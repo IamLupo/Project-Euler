@@ -7,8 +7,6 @@
 #include <string.h>
 #include <stdlib.h>
 
-#include "gmp.h"
-
 #include "IamLupo/string.h"
 #include "IamLupo/number.h"
 
@@ -53,27 +51,24 @@ vector<Pair> readFile(const string &f) {
 }
 
 int findHighestValue(const string &f) {
-	int i, r;
+	int i, h, v, r;
 	vector<Pair> p;
-	mpz_t a, h;
 	
 	//Init
 	r = 0;
-	mpz_init(a);
-	mpz_init_set_ui(h, 0);
+	h = 0;
 	p = readFile(f);
 	
 	for(i = 0; i < p.size(); i++) {
-		mpz_set_ui(a, p[i][0]);
-		mpz_pow_ui(a, a, p[i][1]);
+		v = log(p[i][0]) * p[i][1];
 		
-		if(mpz_cmp(a, h) > 0) {
-			mpz_set(h, a);
-			r = i + 1;
+		if(h < v) {
+			r = i;
+			h = v;
 		}
 	}
 	
-	return r;
+	return r + 1;
 }
 
 int main() {
