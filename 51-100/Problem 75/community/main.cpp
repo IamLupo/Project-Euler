@@ -1,9 +1,10 @@
-#include<stdio.h>
-#include<time.h>
+#include<iostream>
 
 /*
 	https://en.wikipedia.org/wiki/Tree_of_primitive_Pythagorean_triples
 */
+
+using namespace std;
 
 #define MAX_NUM 1500000
 
@@ -21,7 +22,7 @@ void generate_triplets(int m, int n) {
 
 	//Save results
 	for(i = v; i <= MAX_NUM; i += v)
-		++array_L[i];    
+		array_L[i]++;
 
 	//Generate next level
 	generate_triplets(2 * m - n, m);
@@ -30,8 +31,7 @@ void generate_triplets(int m, int n) {
 }
 
 int main() {
-	int distinct_L = 0;
-	clock_t start = clock();
+	int c = 0;
 	
 	//Generate
 	generate_triplets(2, 1);
@@ -39,10 +39,10 @@ int main() {
 	//Find result
 	for(int i = 0; i < MAX_NUM; ++i)
 		if(array_L[i] == 1)
-			++distinct_L;
+			c++;
 	
 	//Draw
-	printf("%d, %f\n", distinct_L, (double)(clock() - start) / CLOCKS_PER_SEC);
+	cout << c << endl;
 	
 	return 0;
 }

@@ -41,7 +41,7 @@ int main() {
 
 		p.push_back(t);
 
-		cout << t << endl;
+		//cout << t << endl;
 		
 		if(t == 0) {
 			cout << j << endl;
