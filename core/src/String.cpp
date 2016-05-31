@@ -16,6 +16,18 @@ bool IamLupo::String::isPalindrome(const std::string &s) {
 	return true;
 }
 
+/*
+	check if two words contain the same charters
+	
+	Example:
+		INTRODUCE - REDUCTION
+		ITEM - TIME
+		ITS - SIT
+		LATER - LATTER
+		LATER - RELATE
+		LATTER - RELATE
+		LAW - WALL
+*/
 bool IamLupo::String::common(const std::string &a, const std::string &b) {
 	int i, j;
 	bool f;
