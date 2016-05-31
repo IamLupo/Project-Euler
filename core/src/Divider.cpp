@@ -6,20 +6,12 @@ std::vector<int> IamLupo::Divider::get(long long v) {
 	int i, d;
 	std::vector<int> r;
 	
-	if(v == 4)
-		return r;
-	
 	r.push_back(1);
 	d = v / 2;
 	
-	for(i = 2; i < d; i++) {
-		if(v % i == 0) {
-			d = v / i;
+	for(i = 2; i <= d; i++) {
+		if(v % i == 0)
 			r.push_back(i);
-			
-			if(i != d)
-				r.push_back(d);
-		}
 	}
 	
 	std::sort(r.begin(), r.end());
