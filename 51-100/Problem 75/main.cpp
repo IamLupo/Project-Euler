@@ -32,9 +32,12 @@ using namespace std;
 */
 
 int countUniqueTriangleSideLength(int l) {
-	long long a, b, c, m, n, k, t, v;
-	vector<long long> once, multiple;
-	vector<long long>::iterator it;
+	int m, n, k, r;
+	long long t, v;
+	vector<long long> lst(l + 1, 0);
+	
+	//Init
+	r = 0;
 	
 	for(n = 1; 2 * (n + 1) * ((n + 1) + n) <= l; n++) {
 		for(m = n + 1; 2 * m * (m + n) <= l; m++) {
@@ -44,30 +47,18 @@ int countUniqueTriangleSideLength(int l) {
 				for(k = 1; t * k <= l; k++) {
 					v = t * k;
 					
-					if(v <= l) {
-						it = find(multiple.begin(), multiple.end(), v);
-						if(it == multiple.end()) {
-							it = find(once.begin(), once.end(), v);
-							
-							//Add
-							if(it == once.end()) {
-								once.push_back(v);
-							} else { // Remove and Add
-								//Remove
-								once.erase(it);
-								
-								//Add
-								multiple.push_back(v);
-							}
-						}
-					}
+					if(v <= l)
+						lst[v]++;
 				}
 			}
 		}
-		cout << "Progress(611 / " << n << ") = " << once.size() << endl;
 	}
 	
-	return once.size();
+	for(n = 0; n < lst.size(); n++)
+		if(lst[n] == 1)
+			r++;
+	
+	return r;
 }
 
 int main() {
