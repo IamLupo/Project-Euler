@@ -6,8 +6,8 @@
 #include <fstream>
 #include <string.h>
 #include <stdlib.h>
-
-#include "IamLupo/number.h"
+#include <set>
+#include <climits>
 
 using namespace std;
 
@@ -34,69 +34,40 @@ using namespace std;
 	n < f(n) <= n * 2
 */
 
-static int lowest;
-static int loop;
-static int found_at;
-static int loop_max;
+static vector<int> list(12100, INT_MAX);
 
-void bruteforce(int target, int x, int sum_p, int sum_m, int l) {
-	int i, m, p;
+/*
+	Depth First Search
+*/
+void dfs(int product, int sum, int m, int depth, int max) {
+    int i, u, pos;
+
+	//Init
+	pos = product - sum + depth;
+    u = (max + sum + depth + 1) / (product - 1);
 	
-	if(target == l) {
-		if(sum_p == sum_m && lowest > sum_p) {
-			lowest = sum_p;
-			found_at = loop;
-		}
-	}
-	else {
-		for(i = x; i <= target; i++) {
-			p = sum_p + i;
-			m = sum_m * i;
-			loop++;
-			
-			if(lowest > p && p >= m) {
-				bruteforce(target, i, p, m, l + 1);
-				
-				if(loop > loop_max)
-					return;
-			}
-			else
-				i = target;
-		}
-	}
+	//Update value
+	if(depth >= 2 && product < list[pos])
+		list[pos] = product;
+	
+	//Next depth
+    for(i = m; i <= u; i++)
+        dfs(product * i, sum + i, i, depth + 1, max);
 }
 
 int sumProduct(int l) {
 	int i;
-	vector<int> r;
-	vector<int>::iterator it;
+	set<int> st;
 	
-	loop_max = 25;
+	//Generate
+	for(i = 2; i < 120; i++)
+		dfs(i, i, i, 1, l);
+
+	//Filter uniek values
+	for(i = 2; i <= l; i++)
+		st.insert(list[i]);
 	
-	for(i = 2; i <= l; i++) {
-		//Calc f(i)
-		loop = 0;
-		lowest = i * 2;
-		if(found_at != 0 && loop_max < found_at * 1.5)
-			loop_max = found_at * 1.5;
-		found_at = 0;
-		
-		bruteforce(i, 1, 0, 1, 0);
-		
-		//only add the result once to the list
-		it = find(r.begin(), r.end(), lowest);
-		if(it == r.end())
-			r.push_back(lowest);
-		
-		//Debug
-		system("clear");
-		cout << "Progress: " << i << "/" << l << endl;
-		cout << found_at << "/" << loop << endl;
-		
-	}
-	
-	//system("clear");
-	return IamLupo::Number::sum(r);
+	return accumulate(st.begin(), st.end(), 0);
 }
 
 int main() {
