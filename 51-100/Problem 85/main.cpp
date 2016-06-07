@@ -8,8 +8,6 @@
 #include <stdlib.h>
 #include <time.h>
 
-#include "IamLupo/triangular.h"
-
 using namespace std;
 
 /*
@@ -33,24 +31,43 @@ using namespace std;
 	....
 */
 
-int getNearestArea(int a) {
-	int i, j, r, l, d, t;
-	IamLupo::Triangulars v;
+vector<int> generate(int l) {
+	int x, y;
+	vector<int> r;
 	
+	//Init
+	x = 1;
+	y = 1;
+	
+	while(x <= l) {
+		r.push_back(x);
+		y++;
+		x += y;
+	}
+	
+	return r;
+}
+
+int getNearestArea(int a) {
+	int i, j, r, h, d, t;
+	vector<int> v;
+	
+	//Init
 	r = 0;
-	l = -1;
-	v = IamLupo::Triangular::generate(2000);
+	h = -1;
+	v = generate(3500);
 	
 	for(i = 0; i < v.size(); i++) {
 		for(j = 0; j < v.size(); j++) {
 			//calc possibilities
-			t = (v[i] * v[j]);
+			t = v[i] * v[j];
+			
 			//calc distance to objective
-			d = (a - t >= 0) ? a - t : (a - t) * - 1;
+			d = (a >= t) ? a - t : t - a;
 			
 			//found a smaller distance to our answer
-			if(l == -1 || l > d) {
-				l = d;
+			if(h == -1 || h > d) {
+				h = d;
 				
 				//Calc area
 				r = (i + 1) * (j + 1);
