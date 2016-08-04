@@ -46,82 +46,120 @@ using namespace std;
 		solution = (x + 1) / 2
 */
 
+typedef vector<int> Powers;
+
 static IamLupo::Primes primes;
 
-void gen_value(const vector<int> &v, mpz_t output) {
+/*
+	Generate the value with the prime powers.
+	
+	Example:
+		f({2, 1, 1, 1}) = 2^2 * 3^1 * 5^1 * 7^1 = 210
+*/
+void gen_n(const Powers &p, mpz_t output) {
 	int i;
+	mpz_t t;
 	
 	//Init
+	mpz_init(t);
 	mpz_set_ui(output, 1);
 	
-	for(i = 0; i < v.size(); i++)
-		mpz_mul_ui(output, output, pow(primes[i], v[i]));
+	for(i = 0; i < p.size(); i++) {
+		// output *= prime[i] ^ p[i]
+		mpz_set_ui(t, primes[i]);
+		mpz_pow_ui(t, t, p[i]);
+		mpz_mul(output, output, t);
+	}
+	
+	//Clear
+	mpz_clear(t);
 }
 
-int solution(const vector<int> &v) {
-	int i, r;
+static mpz_t bruteforce_n;
+static long long bruteforce_l;
+
+/*
+	Bruteforce prime powers until minimum solutions in n found
+*/
+void bruteforce(const Powers &p, long long x) {
+	int i, s, ch;
+	long long x2;
+	mpz_t n;
+	Powers p2;
 	
 	//Init
-	r = 1;
+	mpz_init(n);
+	s = p.size();
+	ch = (s == 0) ? 7 : p[s - 1];	//Max loops
 	
-	for(i = 0; i < v.size(); i++)
-		r *= (v[i] * 2) + 1;
-	
-	return (r + 1) / 2;
-}
-
-static mpz_t g_val;
-
-void algo(const vector<int> &v, int l) {
-	int i;
-	mpz_t x;
-	vector<int> r;
-	
-	//Init
-	mpz_init(x);
-	
-	for(i = 1; i <= v[v.size() - 1]; i++) {
-		r = v;
-		r.push_back(i);
+	for(i = 1; i <= ch; i++) {
+		//Generate next prime power level
+		p2 = p;
+		p2.push_back(i);
 		
-		if(solution(r) >= l) {
-			gen_value(r, x);
-			
-			if(mpz_cmp(g_val, x) > 0) {
-				mpz_set(g_val, x);
+		//Update x
+		x2 = x * ((i * 2) + 1);
+		
+		//Calculate n
+		gen_n(p2, n);
+		
+		// If we find a n with enough solutions
+		if(x2 >= bruteforce_l) {
+			// If n is smaller then we already found
+			if(mpz_cmp(bruteforce_n, n) > 0 || mpz_cmp_ui(bruteforce_n, -1) == 0) {
+				mpz_set(bruteforce_n, n);
 				
 				//Debug
-				//cout << mpz_get_str(nullptr, 10, x) << endl;
+				//cout << mpz_get_str(nullptr, 10, n) << endl;
 			}
-		} else {
-			algo(r, l);
+		}
+		/*
+			If prime powers still generate a lower n then we already found
+			we can bruteforce next level
+		*/
+		else if(mpz_cmp(bruteforce_n, n) > 0 || mpz_cmp_ui(bruteforce_n, -1) == 0) {
+			bruteforce(p2, x2);
 		}
 	}
 	
-	mpz_clear(x);
+	mpz_clear(n);
 }
 
-string f(int l) {
-	int i;
+/*
+	generate n with the min solution
+*/
+string f(long long l) {
 	string r;
 	
-	//Init
-	mpz_init_set_ui(g_val, -1);
+	//Initialise settings to bruteforce
+	bruteforce_l = (l * 2) - 1;
+	mpz_init_set_ui(bruteforce_n, -1);
+
+	//Bruteforce answer
+	bruteforce({}, 1);
 	
-	for(i = 1; i <= 10; i++)
-		algo({i}, l);
+	//Convert to string
+	r = mpz_get_str(nullptr, 10, bruteforce_n);
 	
-	r = mpz_get_str(nullptr, 10, g_val);
-	
-	mpz_clear(g_val);
+	//Clear
+	mpz_clear(bruteforce_n);
 	
 	return r;
 }
 
 int main() {
-	primes = IamLupo::Prime::generate(300);
+	primes = IamLupo::Prime::generate(200);
 	
 	cout << "Result = " << f(4000000) << endl;
+	
+	/*
+	cout << "f(1000)                = " << f(1000) << endl;
+	cout << "f(4000000)             = " << f(4000000) << endl;
+	cout << "f(1000000000)          = " << f(1000000000) << endl;
+	cout << "f(1000000000000)       = " << f(1000000000000) << endl;
+	cout << "f(1000000000000000)    = " << f(1000000000000000) << endl;
+	cout << "f(1000000000000000000) = " << f(1000000000000000000) << endl;
+	*/
 	
 	return 0;
 }
