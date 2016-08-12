@@ -1,7 +1,7 @@
 In the game of darts a player throws three darts at a target board which is split into
 twenty equal sized sections numbered one to twenty.
 
-![](101-150/Problem 109/p109.gif.gif)
+![](101-150/Problem 109/p109.gif)
 
 The score of a dart is determined by the number of the region that the dart lands in.
 A dart landing outside the red/green outer ring scores zero. The black and cream regions
