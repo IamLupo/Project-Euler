@@ -8,17 +8,17 @@ So M(4, 1) = 3 is the maximum number of repeated digits for a 4-digit prime wher
 
 In the same way we obtain the following results for 4-digit primes.
 
-	Digit, d 	M(4, d) 	N(4, d) 	S(4, d)
-	0	2 	13 	67061
-	1 	3 	9 	22275
-	2 	3 	1 	2221
-	3 	3 	12 	46214
-	4 	3 	2 	8888
-	5 	3 	1 	5557
-	6 	3 	1 	6661
-	7 	3 	9 	57863
-	8 	3 	1 	8887
-	9 	3 	7 	48073
+	Digit, d   M(4, d)  N(4, d)   S(4, d)
+	0          2        13        67061
+	1          3        9         22275
+	2          3        1         2221
+	3          3        12        46214
+	4          3        2         8888
+	5          3        1         5557
+	6          3        1         6661
+	7          3        9         57863
+	8          3        1         8887
+	9          3        7         48073
 
 For d = 0 to 9, the sum of all S(4, d) is 273700.
 
