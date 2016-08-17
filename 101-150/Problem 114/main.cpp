@@ -7,6 +7,8 @@
 #include <string.h>
 #include <stdlib.h>
 
+#include "IamLupo/math.h"
+
 using namespace std;
 
 /*
@@ -47,35 +49,6 @@ long long f2(int len) {
 }
 
 /* Fast Solution */
-long long binomial_coefficient(unsigned long n, unsigned long k) {
-    unsigned long i;
-    long long b;
-	
-    if (0 == k || n == k)
-        return 1;
-    
-    if (k > n)
-        return 0;
-    
-    if (k > (n - k))
-        k = n - k;
-    
-    if (1 == k)
-        return n;
-    
-    b = 1;
-    for (i = 1; i <= k; ++i) {
-        b *= (n - (k - i));
-		
-        if (b < 0)
-			return -1; /* Overflow */
-        
-		b /= i;
-    }
-	
-    return b;
-}
-
 long long f(int n) {
 	int k;
 	long long r;
@@ -85,7 +58,7 @@ long long f(int n) {
 	n++;
 	
 	for(k = 0; k <= n / 4; k++)
-		r += binomial_coefficient(n - (2 * k), 2 * k);
+		r += IamLupo::Math::binomial_coefficient(n - (2 * k), 2 * k);
 	
 	return r;
 }
