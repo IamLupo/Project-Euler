@@ -2,6 +2,6 @@ Using a combination of black square tiles and oblong tiles chosen from: red tile
 units, green tiles measuring three units, and blue tiles measuring four units, it is possible to
 tile a row measuring five units in length in exactly fifteen different ways.
 
-![](101-150/Problem 116/example.png)
+![](101-150/Problem 117/example.png)
 
 How many ways can a row measuring fifty units in length be tiled?
