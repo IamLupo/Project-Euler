@@ -1,0 +1,8 @@
+....
+xx..
+.xx.
+..xx
+xxxx
+yyy.
+.yyy
+zzzz

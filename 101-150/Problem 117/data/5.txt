@@ -1,0 +1,15 @@
+.....
+xx...
+.xx..
+..xx.
+...xx
+xxxx.
+xx.xx
+.xxxx
+yyy..
+.yyy.
+..yyy
+xxyyy
+yyyxx
+zzzz.
+.zzzz
