@@ -17,26 +17,50 @@ using namespace std;
 
 static IamLupo::Primes primes;
 
-long long f(int p) {
-	int i, c;
+/*
+	Generated eureqa formula to skip checking primes and
+	start at nearly close to solution the results
 	
-	//c = (prime index + 1) * 2
-	c = 2;
+	Tested for result till 10^15 and lower
+*/
+int start(int x) {
+	float a, b, c, d, e, r;
+	
+	/*
+		y = 0.303232697920926*x^3 + 0.0919843851070339*x*exp(x) + 1.21794764462935e-5*x*exp(1.5228266443024*x) - 6.66159037803082e-8*exp(2*x)
+	*/
+	a = 0.303232697920926;
+	b = 0.0919843851070339;
+	c = 1.21794764462935e-5;
+	d = 1.5228266443024;
+	e = 6.66159037803082e-8;
+	
+	//Calc
+	r = (a*pow(x, 3) + b*x*exp(x)) + (c*x*exp(d*x)) - (e*exp(2*x));
+	
+	/*
+		some results where to high. subtracted 22 to
+		always have a lower start potion then the origal answer
+	*/
+	r -= 22;
+	
+	return (r < 0 ? 0 : r);
+}
+
+long long f(int p) {
+	int i;
 	
 	// Loop even prime index id's
-	for(i = 0; i < primes.size(); i += 2) { 
+	for(i = start(p); i < primes.size(); i += 2) { 
 		//Debug
-		//cout << primes[i] * c << ", ";
+		//cout << i << "	" << primes[i] * c << endl;
 		
 		// Check results
-		if(primes[i] * c > pow(10, p))
+		if(primes[i] * ((i + 1) * 2) > pow(10, p))
 			return i + 1;
-		
-		//Generate next generation
-		c += 4;
 	}
 	
-	return -1; // Unknown
+	return -1; // Generate more primes pls :'(
 }
 
 int main() {
