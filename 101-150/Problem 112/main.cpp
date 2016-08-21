@@ -38,39 +38,20 @@ bool isBouncy(int v) {
 }
 
 int f(double l) {
-	int i, c, c2;
-	double p;
+	double i, c;
 	
 	//Init
+	i = 10;
 	c = 0;
-	c2 = 0;
 	
-	for(i = 10; i < 100000000; i++) {
+	while(true) {
 		if(isBouncy(i)) {
 			c++;
-			c2++;
 			
-			p = (double)c / (double)i;
-			
-			//Debug
-			//cout << i << endl;
-			
-			if(p >= l)
+			if(c / i >= l)
 				return i;
 		}
-		
-		//Debug Data pattern
-		/*
-		if(i % 1 == 0) {
-			
-			cout << c2 << "	";
-			
-			if((i + 1) % 10 == 0)
-				cout << endl;
-			
-			c2 = 0;
-		}
-		*/
+		i++;
 	}
 	
 	return -1; //Unknown
