@@ -7,86 +7,63 @@
 #include <string.h>
 #include <stdlib.h>
 
-#include "IamLupo/vector.h"
-#include "IamLupo/number.h"
-
 using namespace std;
 
 /*
 	How many starting numbers below ten million will arrive at 89?
 */
 
-int sumSquareRoot(int v) {
-	int i;
-	vector<int> r;
-	
-	r = IamLupo::Vector::to(v);
-	
-	for(i = 0; i < r.size(); i++)
-		r[i] *= r[i];
-	
-	return IamLupo::Number::sum(r);
-}
+static vector<int> list(10000000, 0);
 
-int countSequence(int l) {
-	int i, j, v, r;
-	static vector<int> f, t;
+bool chain(int n) {
+	int v, d, n2;
+	
+	if(list[n] == 1)
+		return true;
 	
 	//Init
-	r = 1; // we already have 89
+	v = n;
+	n2 = 0;
 	
-	/*
-		generate found table
-		
-		-1 = will not reach to 89
-		0 = unknown link
-		1 = will reach to 89
-	*/
-	for(i = 0; i < 10000000; i++)
-		f.push_back(0);
-	
-	//We know that 89 is a valid answer
-	f[89] = 1;
-	
-	//Make all chance
-	for(i = 1; i <= l; i++) {
-		v = i;
-		
-		//Initialize temp list
-		t.clear();
-		t.push_back(v);
-		
-		//Keep looking for new values till we reach a link
-		while(f[v] == 0) {
-			//Default say it will not reach 89
-			f[v] = -1;
-			
-			//Calculate next level
-			v = sumSquareRoot(v);
-			
-			//Store in our temp list
-			t.push_back(v);
-		}
-		
-		//We found a link to 89
-		if(f[v] == 1) {
-			//Make all values in temp list that it has a link to 89
-			for(j = 0; j < t.size(); j++)
-				f[t[j]] = 1;
-			
-			//add new numbers to total size
-			r += t.size() - 1;
-		}
+	//Generate next value
+	while(v) {
+		d = v % 10;
+		n2 += d * d;
+		v /= 10;
 	}
 	
-	//Fix: buffer overflow after multiple calls to "countSequence" function
-	f.clear();
+	//Check if next value already been checked
+	if(list[n2] != 0) {
+		list[n] = list[n2];
+		return (list[n2] == 1);
+	} else {
+		// If next value dont exist yet, generate next level
+		if(chain(n2)) {
+			list[n] = 1;
+			return true;
+		} else {
+			list[n] = -1;
+			return false;
+		}
+	}
+}
+
+int f(int l) {
+	int i, r;
 	
+	//Init
+	r = 0;
+	list[1]--;
+	list[89]++;
+
+	for (i = 1; i < l; i++)
+		r += chain(i);
+
 	return r;
 }
 
 int main() {
-	cout << "result = " << countSequence(10000000) << endl;
+	cout << "Result = " << f(10000000) << endl;
 	
 	return 0;
 }
