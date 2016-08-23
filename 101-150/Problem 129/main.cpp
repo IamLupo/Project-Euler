@@ -183,12 +183,12 @@ int f(int l) {
 	int i, v, n, k, c;
 	
 	//Init
-	v = l / 10;
+	v = (l / 10) * 10; // Remove last number
 	
 	while(true) {
 		for(i = 0; i < digit.size(); i++) {
 			//Generate a number
-			n = (v * 10) + digit[i];
+			n = v + digit[i];
 			
 			//Init
 			k = 1;
@@ -206,7 +206,7 @@ int f(int l) {
 			if(k > l)
 				return n;
 		}
-		v++;
+		v += 10;
 	}
 	
 	return -1; // Unknown error :$
