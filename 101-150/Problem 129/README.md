@@ -1,22 +1,10 @@
-A hexagonal tile with number 1 is surrounded by a ring of six hexagonal tiles, starting at
-"12 o'clock" and numbering the tiles 2 to 7 in an anti-clockwise direction.
+A number consisting entirely of ones is called a repunit. We shall define R(k) to be a repunit
+of length k; for example, R(6) = 111111.
 
-New rings are added in the same fashion, with the next rings being numbered 8 to 19, 20 to 37, 38
-to 61, and so on. The diagram below shows the first three rings.
+Given that n is a positive integer and GCD(n, 10) = 1, it can be shown that there always exists
+a value, k, for which R(k) is divisible by n, and let A(n) be the least such value of k;
+for example, A(7) = 6 and A(41) = 5.
 
-![](101-150/Problem 128/p128.gif)
+The least value of n for which A(n) first exceeds ten is 17.
 
-By finding the difference between tile n and each of its six neighbours we shall define PD(n)
-to be the number of those differences which are prime.
-
-For example, working clockwise around tile 8 the differences are 12, 29, 11, 6, 1, and 13.
-So PD(8) = 3.
-
-In the same way, the differences around tile 17 are 1, 17, 16, 1, 11, and 10, hence PD(17) = 2.
-
-It can be shown that the maximum value of PD(n) is 3.
-
-If all of the tiles for which PD(n) = 3 are listed in ascending order to form a sequence,
-the 10th tile would be 271.
-
-Find the 2000th tile in this sequence.
+Find the least value of n for which A(n) first exceeds one-million.
