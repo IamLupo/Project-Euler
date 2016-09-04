@@ -9,6 +9,7 @@ Surprisingly AF(1/2) = (1/2).1 + (1/2)2.1 + (1/2)3.2 + (1/2)4.3 + (1/2)5.5 + ...
                      = 2
 
 The corresponding values of x for the first five natural numbers are shown below.
+
 	x           AF(x)
 	√2−1        1
 	1/2         2
