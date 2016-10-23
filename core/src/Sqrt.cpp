@@ -2,6 +2,15 @@
 
 #include "IamLupo/sqrt.h"
 
+bool IamLupo::Sqrt::is(long long n) {
+	if (n < 0)
+		return false;
+
+	long long x = sqrt(n);
+	
+	return x * x == n;
+}
+
 /*
 	Continued fraction expansion
 	

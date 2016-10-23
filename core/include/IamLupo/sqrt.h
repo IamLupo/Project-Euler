@@ -14,6 +14,8 @@ namespace IamLupo {
 			mpz_t y2;
 		};
 		
+		bool is(long long n);
+		
 		CFraction ContinuedFraction(long long s);
 		
 		ExponentialE Expo_Init(const CFraction &fr);

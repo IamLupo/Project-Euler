@@ -7,6 +7,7 @@
 #include <string.h>
 #include <stdlib.h>
 
+#include "IamLupo/sqrt.h"
 #include "IamLupo/math.h"
 
 using namespace std;
@@ -93,15 +94,6 @@ using namespace std;
 		This means we can even reduce the x area.
 */
 
-bool isPerfectSquare(long long n) {
-	if (n < 0)
-		return false;
-
-	long long x = sqrt(n);
-	
-	return x * x == n;
-}
-
 long long f(long long l) {
 	long long p1, p2, d, q, r, x, n;
 	vector<long long> v;
@@ -120,7 +112,7 @@ long long f(long long l) {
 							q = (d * p1) / p2;
 							n = d * q + r;
 							
-							if(n < l && isPerfectSquare(n)) {
+							if(n < l && IamLupo::Sqrt::is(n)) {
 								v.push_back(n);
 								
 								//Debug
