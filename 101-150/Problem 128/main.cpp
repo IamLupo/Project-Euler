@@ -48,26 +48,20 @@ int PD(long long n, vector<long long> &v) {
 void next(Tile &t) {
 	long long d;
 	
+	//Init
 	d = t.v[4] - t.n;
 	
-	t.v[0] = t.v[3];
-	t.v[1] = t.n;
-	t.v[2] = t.v[5];
-	
-	t.n = t.v[4];
-	
-	// Left Tile
-	if(t.n % 2 == 0) {
-		t.v[3] += d + 6;
-		t.v[4] += d + 6;
-		t.v[5] += d + 12;
-	}
-	else
-	{ // Right Tile
-		t.v[3] += d - 6;
-		t.v[4] += d + 6;
-		t.v[5] += d + 6;
-	}
+	t = {
+		t.v[4],
+		{
+			t.v[3],
+			t.n,
+			t.v[5],
+			(t.n % 2 == 0) ? t.v[3] + d + 6 : t.v[3] + d - 6,
+			t.v[4] + d + 6,
+			(t.n % 2 == 0) ? t.v[5] + d + 12 : t.v[5] + d + 6,
+		}
+	};
 }
 
 long long f(int l) {
@@ -76,35 +70,26 @@ long long f(int l) {
 	
 	//Init
 	r = 1; // we skip 1 because PD(1) = 3 
-	
-	t1.n = 2;
-	t1.v = {3, 1, 7, 9, 8, 19};
-	
-	t2.n = 7;
-	t2.v = {1, 6, 17, 2, 19, 18};
+	t1 = {2, {3, 1, 7, 9, 8, 19}};
+	t2 = {7, {1, 6, 17, 2, 19, 18}};
 
 	while(true) {
 		if(PD(t1.n, t1.v) == 3) {
 			r++;
 			
-			//Debug
-			//cout << t1.n << endl;
-			
 			if(r == l)
 				return t1.n;
 		}
-		next(t1);
 		
 		if(PD(t2.n, t2.v) == 3) {
 			r++;
-			
-			//Debug
-			//cout << t2.n << endl;
 			
 			if(r == l)
 				return t2.n;
 		}
 		
+		//Calculate next Tiles
+		next(t1);
 		next(t2);
 	}
 	
