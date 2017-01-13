@@ -1,7 +1,7 @@
 In a 3x2 cross-hatched grid, a total of 37 different rectangles could be situated
 within that grid as indicated in the sketch.
 
-![](101-150/Problem 147/p147_1.gif)
+![](101-150/Problem 147/p147.gif)
 
 There are 5 grids smaller than 3x2, vertical and horizontal dimensions being important,
 i.e. 1x1, 2x1, 3x1, 1x2 and 2x2. If each of them is cross-hatched, the following number
