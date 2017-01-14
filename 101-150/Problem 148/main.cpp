@@ -34,7 +34,7 @@ using namespace std;
 	Conclusion A:
 		In the data we can look clearly for a pattern.
 		We have a set {1,	2,	3,	4,	5,	6,	7}.
-		First row its multipiplied by 0, second row by 1, third by 3,....
+		First row its multipiplied by 1, second row by 2, third by 3,....
 	
 	Conclusion B:
 		After 7e row the set will be updated + its own value.
@@ -48,46 +48,14 @@ using namespace std;
 		Set 7: {7,	14,	21,	28,	35,	42,	48}
 		
 	Conclusion C:
-		If you have a number "n" every time the number can be divided by 8 there
+		If you have a number "n" every time the number can be divided by 7 there
 		is a extra layer that stores a set {1,	2,	3,	4,	5,	6,	7} as a start.
 		the first layer increased by the add function and pass its sets to
 		the next layer. Every layer can only loop 7 times and then it
-		will return to the layer.	
+		will return to the parent layer.
 */
 
 typedef vector<unsigned long long> Set;
-
-string draw(const Set &r) {
-	int i;
-	string s;
-	
-	s = "{";
-	for(i = 0; i < r.size(); i++) {
-		s += to_string(r[i]);
-		
-		if(i + 1 != r.size())
-			s += ", ";
-	}
-	s += "}";
-	
-	return s;
-}
-
-/*
-	f(x) = 1 + 2 + 3 + ... + x
-	
-	Example:
-		f(6) = 1 + 2 + 3 + 4 + 5 + 6 = 21
-*/
-long long range(int n) {
-	if(n == 1)
-		return 1;
-	
-	if(n % 2 == 1)
-		return ((n / 2) * (n + 1)) + (n / 2) + 1;
-	else
-		return (n / 2) * (n + 1);
-}
 
 Set add(const Set &a, const Set &b) {
 	int i;
