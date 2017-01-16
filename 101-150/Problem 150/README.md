@@ -1,25 +1,30 @@
-Looking at the table below, it is easy to verify that the maximum possible sum of
-adjacent numbers in any direction (horizontal, vertical, diagonal or anti-diagonal)
-is 16 (= 8 + 7 + 1).
+In a triangular array of positive and negative integers, we wish to find a
+sub-triangle such that the sum of the numbers it contains is the smallest possible.
 
-	−2	5	3	2
-	9	−6	5	1
-	3	2	7	3
-	−1	8	−4	8
+In the example below, it can be easily verified that the marked triangle satisfies
+this condition having a sum of −42.
 
-Now, let us repeat the search, but on a much larger scale:
+We wish to make such a triangular array with one thousand rows, so we generate
+500500 pseudo-random numbers sk in the range ±219, using a type of random number
+generator (known as a Linear Congruential Generator) as follows:
 
-First, generate four million pseudo-random numbers using a specific form of what is
-known as a "Lagged Fibonacci Generator":
+	t := 0
+	for k = 1 up to k = 500500:
+		t := (615949*t + 797807) modulo 2^20
+		s^k := t−2^19
 
-For 1 ≤ k ≤ 55, sk = [100003 − 200003k + 300007k^3] (modulo 1000000) − 500000.
-For 56 ≤ k ≤ 4000000, sk = [sk−24 + sk−55 + 1000000] (modulo 1000000) − 500000.
+Thus: s^1 = 273519, s^2 = −153582, s^3 = 450905 etc
 
-Thus, s10 = −393027 and s100 = 86613.
+Our triangular array is then formed using the pseudo-random numbers thus:
 
-The terms of s are then arranged in a 2000×2000 table, using the first 2000
-numbers to fill the first row (sequentially), the next 2000 numbers to fill
-the second row, and so on.
+	s^1
+	s^2  s^3
+	s^4  s^5  s^6 
+	s^7  s^8  s^9  s^10
+	...
 
-Finally, find the greatest sum of (any number of) adjacent entries in any direction
-(horizontal, vertical, diagonal or anti-diagonal).
+Sub-triangles can start at any element of the array and extend down as far as we
+like (taking-in the two elements directly below it from the next row, the three
+elements directly below from the row after that, and so on).
+The "sum of a sub-triangle" is defined as the sum of all the elements it contains.
+Find the smallest possible sub-triangle sum.
