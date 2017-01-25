@@ -20,6 +20,24 @@ static IamLupo::Primes primes;
 
 static vector<int> digit = {1, 3, 7, 9};
 
+int A(int n) {
+	int k, c;
+	
+	//Init
+	k = 1;
+	c = 1;
+	
+	//Generate k
+	while(c % n != 0) {
+		c %= n;
+		c *= 10;
+		c += 1;
+		k++;
+	}
+	
+	return k;
+}
+
 long long f(int l) {
 	int i, v, n, k, c;
 	vector<int> r;
@@ -33,20 +51,8 @@ long long f(int l) {
 			n = v + digit[i];
 			
 			if(n > 5 && !IamLupo::Prime::is(primes, n)) {
-				//Init
-				k = 1;
-				c = 1;
-				
-				//Generate k
-				while(c % n != 0) {
-					c %= n;
-					c *= 10;
-					c += 1;
-					k++;
-				}
-				
 				//Found rare composite value
-				if((n - 1) % k == 0) {
+				if((n - 1) % A(n) == 0) {
 					//Save result
 					r.push_back(n);
 					
