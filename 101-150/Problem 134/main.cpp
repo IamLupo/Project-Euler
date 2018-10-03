@@ -16,48 +16,42 @@ using namespace std;
 	Find ∑ S for every pair of consecutive primes with 5 ≤ p1 ≤ 1000000.
 */
 
-/*
-	Data:
-		f(19, 23) = 53 * 23 = 1219
-*/
-
 static IamLupo::Primes primes;
 
-long long find(int p1, int p2) {
-	int m;
-	long long r;
+unsigned long long f(int l) {
+	int i;
+	unsigned long long k, r, x, y;
+	mpz_t v, mod;
 	
-	//generate modulo
-	m = 1;
-	while(m < p1)
-		m *= 10;
+	//Init
+	mpz_init(v);
+	mpz_init(mod);
+	k = 10;
+	r = 0;
 	
-	//Find answer
-	r = p2 + p2;
-	while(p1 != r % m)
-		r += p2;
-	
-	cout << p1 << " " << p2 << " " << (r / p2) << " " << r << endl;
+	for(i = 2; i < primes.size() && primes[i] <= l; i++) {
+		if(primes[i] > k)
+			k *= 10;
+		
+		// Set
+		mpz_set_ui(v, primes[i + 1]);
+		mpz_set_ui(mod, k);
+		
+		// Get multiplier for next prime
+		mpz_powm_ui(v, v, (k / 10 * 4) - 1, mod);
+		mpz_mul_ui(v, v, primes[i]);
+		mpz_mod(v, v, mod);
+		
+		// r += v * p2
+		r += primes[i + 1] * mpz_get_ui(v);
+	}
 	
 	return r;
 }
 
-string f(int l) {
-	int i;
-	mpz_t r;
-	
-	//Init
-	mpz_init_set_ui(r, 0);
-	
-	for(i = 2; i < primes.size() && primes[i] <= l; i++)
-		mpz_add_ui(r, r, find(primes[i], primes[i + 1]));
-	
-	return mpz_get_str(nullptr, 10, r);
-}
-
 int main() {
 	primes = IamLupo::Prime::generate(1001000);
-
+	
 	cout << "Result = " << f(1000000) << endl;
 	
 	return 0;
